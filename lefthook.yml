@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: eslint
+      run: pnpm eslint {staged_files} --fix
+      glob: '*.{js,ts,json,yml}'
+      stage_fixed: true
+
+    - name: typecheck
+      run: pnpm tsc --noEmit
+      glob: '**/*.ts'

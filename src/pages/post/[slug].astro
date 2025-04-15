@@ -1,0 +1,54 @@
+---
+import { getCollection, getEntry, render } from 'astro:content'
+
+import RootLayout from '@/layouts/root-layout.astro'
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog')
+	return posts.map(post => ({
+		params: { slug: post.id },
+	}))
+}
+
+const { slug } = Astro.params
+const post = await getEntry('blog', slug)
+
+if (!post) {
+	Astro.redirect('/post')
+	return
+}
+
+const category = await getEntry('categories', post.data.category)
+
+if (!category) {
+	Astro.redirect('/post')
+	return
+}
+
+const { Content } = await render(post)
+---
+
+<RootLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
+	<div class="prose font-sans py-2 mx-4" id="post">
+		{post && (
+			<Content />
+		)}
+	</div>
+</RootLayout>
+
+<script>
+	import { animate, inView } from 'motion'
+
+	document.addEventListener('astro:page-load', () => {
+		inView('#post img', (element) => {
+			animate(element, {
+				filter: ['blur(4px)', 'none'],
+				opacity: [0, 1],
+				scale: [0.9, 1],
+				y: [10, 0],
+			}, {
+				delay: 0.2,
+			})
+		})
+	})
+</script>

@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content'
+import { format } from 'date-fns'
+
+import RootLayout from '@/layouts/root-layout.astro'
+
+const posts = await getCollection('blog')
+---
+
+<RootLayout description="All writings written by Xat" tag="Archive - Texts just sparkle in my mind" title="All Writings">
+	<ul class="py-2 flex flex-col gap-1">
+		{posts.map(post => (
+			<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10 relative">
+				<span class="absolute top-2 right-2 opacity-50">{format(post.data.publishedAt, 'yyyy-MM-dd')}</span>
+				<a href={`/post/${post.data.slug}`}>
+					<h4>{post.data.title}</h4>
+					<p class="opacity-50 text-sm">{post.data.summary}</p>
+					<div class="flex items-center gap-2">
+						{post.data.tags.map(tag => (
+							<span class="text-xs">#{tag}</span>
+						))}
+					</div>
+				</a>
+			</li>
+		))}
+	</ul>
+</RootLayout>

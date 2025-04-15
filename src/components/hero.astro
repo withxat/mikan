@@ -1,0 +1,59 @@
+---
+interface Props {
+	text?: string
+}
+
+const { text } = Astro.props;
+---
+
+<h2
+	aria-label={text ?? 'I create clean design and build it to life'}
+	class="mx-4 pb-4 text-shadow text-xl sm:w-xl sm:mx-auto"
+	id="slogan"
+>
+	{
+		text
+			? (
+					text.split('').map(char => <span class="motion-char">{char}</span>)
+				)
+			: (
+					<>
+						<span class="motion-char">I</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char underline">create</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char">clean</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char">design</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char">and</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char underline">build</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char">it</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char">to</span>
+						<span class="motion-char"> </span>
+						<span class="motion-char">life</span>
+					</>
+				)
+	}
+</h2>
+
+<script>
+import { animate, stagger } from 'motion'
+
+document.addEventListener('astro:page-load', () => {
+	animate(
+		'.motion-char',
+		{
+			filter: ['blur(10px)', 'none'],
+			opacity: [0, 1],
+			y: [10, 0],
+		},
+		{
+			delay: stagger(0.05),
+		},
+	)
+})
+</script>

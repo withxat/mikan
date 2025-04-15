@@ -1,0 +1,21 @@
+---
+import { css } from '@/assets/font/fugaz-one.ttf'
+import Tag from '@/components/tag.astro'
+
+interface Props {
+	tag?: string
+}
+
+const { tag } = Astro.props
+---
+
+<header
+	class="flex flex-col gap-1 p-4 text-2xl leading-none font-bold sm:w-xl sm:mx-auto"
+	id="header"
+>
+	<a class="flex gap-1" href="/">
+		<span class="i-mingcute-sparkles-2-fill text-brand-foreground -translate-y-[2px]" transition:name="Sparkles" />
+		<h1 class="leading-none" style={{ fontFamily: css.family }} transition:name="Title">Xat</h1>
+	</a>
+	<Tag tag={tag} />
+</header>

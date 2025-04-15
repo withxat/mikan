@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets'
+
+import AstroSticker from '@/assets/sticker/astro.png'
+import FigmaSticker from '@/assets/sticker/figma.png'
+import GitSticker from '@/assets/sticker/git.png'
+import ReactSticker from '@/assets/sticker/react.png'
+import TailwindSticker from '@/assets/sticker/tailwind.png'
+import TypeScriptSticker from '@/assets/sticker/typescript.png'
+import { cn } from '@/lib/utils'
+
+const stickers = [
+	AstroSticker,
+	FigmaSticker,
+	GitSticker,
+	ReactSticker,
+	TailwindSticker,
+	TypeScriptSticker,
+]
+---
+
+<div class="flex pt-2 gap-0.5" id="stickers">
+	{stickers.map((sticker, index) => (
+		<Image
+			class={cn(
+				'size-8 motion-sticker',
+				index % 2 === 0 ? 'rotate-12' : '-rotate-12',
+			)}
+			alt="Sticker"
+			loading="eager"
+			src={sticker}
+		/>
+	))}
+</div>
+
+<script>
+import { animate, inView, press, stagger } from 'motion'
+
+document.addEventListener('astro:page-load', () => {
+	inView('#stickers', () => {
+		animate('#stickers .motion-sticker', {
+			opacity: [0, 1],
+			scale: [0.8, 1],
+		}, {
+			delay: stagger(0.1),
+		})
+	})
+})
+
+document.addEventListener('astro:page-load', () => {
+	press('#stickers .motion-sticker', (element) => {
+		animate(element, {
+			scale: 0.8,
+		})
+
+		return () => {
+			animate(element, {
+				scale: 1,
+			})
+		}
+	})
+})
+</script>

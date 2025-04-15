@@ -1,0 +1,17 @@
+[
+	{
+		"name": "Life",
+		"slug": "life",
+		"description": "Bubbles of simple life"
+	},
+	{
+		"name": "Tech",
+		"slug": "tech",
+		"description": "Thoughts on technology"
+	},
+	{
+		"name": "Design",
+		"slug": "design",
+		"description": "Satisfying my aesthetic"
+	}
+]

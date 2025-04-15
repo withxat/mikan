@@ -1,0 +1,33 @@
+---
+interface Props {
+	tag?: string
+}
+
+const { tag } = Astro.props
+---
+
+<div class="group relative overflow-hidden font-sans text-sm">
+	{
+		tag
+			? (
+					<span>{tag}</span>
+				)
+			: (
+					<>
+						<span class="invisible">Design Engineer</span>
+						<span class="absolute left-0 top-0 transition-transform duration-300 group-mobile-hover:-translate-y-full">
+							Design Engineer
+						</span>
+						<span class="absolute left-0 top-0 translate-y-full transition-transform duration-300 group-mobile-hover:translate-y-0">
+							<span class="i-mingcute-paint-brush-fill translate-y-[3px]" />
+							{' '}
+							Designer and
+							{' '}
+							<span class="i-mingcute-code-fill translate-y-[3px]" />
+							{' '}
+							Developer
+						</span>
+					</>
+				)
+	}
+</div>
