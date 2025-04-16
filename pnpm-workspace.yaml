@@ -3,3 +3,5 @@ onlyBuiltDependencies:
   - koffi
   - lefthook
   - protobufjs
+  - sharp
+  - esbuild
