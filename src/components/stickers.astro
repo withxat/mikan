@@ -27,7 +27,7 @@ const stickers = [
 				index % 2 === 0 ? 'rotate-12' : '-rotate-12',
 			)}
 			alt="Sticker"
-			loading="eager"
+			loading="lazy"
 			src={sticker}
 		/>
 	))}
@@ -35,17 +35,6 @@ const stickers = [
 
 <script>
 import { animate, inView, press, stagger } from 'motion'
-
-document.addEventListener('astro:page-load', () => {
-	inView('#stickers', () => {
-		animate('#stickers .motion-sticker', {
-			opacity: [0, 1],
-			scale: [0.8, 1],
-		}, {
-			delay: stagger(0.1),
-		})
-	})
-})
 
 document.addEventListener('astro:page-load', () => {
 	press('#stickers .motion-sticker', (element) => {
@@ -58,6 +47,15 @@ document.addEventListener('astro:page-load', () => {
 				scale: 1,
 			})
 		}
+	})
+
+	inView('#stickers', () => {
+		animate('#stickers .motion-sticker', {
+			opacity: [0, 1],
+			scale: [0.8, 1],
+		}, {
+			delay: stagger(0.1),
+		})
 	})
 })
 </script>

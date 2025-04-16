@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xat.sh/sitemap.xml
+Sitemap: https://xat.sh/sitemap-index.xml

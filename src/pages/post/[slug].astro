@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content'
 
+import Imagex from '@/components/post/imagex.astro'
 import RootLayout from '@/layouts/root-layout.astro'
 
 export async function getStaticPaths() {
@@ -31,7 +32,7 @@ const { Content } = await render(post)
 <RootLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
 	<div class="prose font-sans py-2 mx-4 prose-img:opacity-0" id="post">
 		{post && (
-			<Content />
+			<Content components={{ img: Imagex }} />
 		)}
 	</div>
 </RootLayout>
@@ -51,4 +52,24 @@ const { Content } = await render(post)
 			})
 		})
 	})
+</script>
+
+<script>
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+
+import 'photoswipe/style.css'
+
+const lightbox = new PhotoSwipeLightbox({
+	children: 'a:has(img)',
+	gallery: '#post',
+	pswpModule: () => import('photoswipe'),
+})
+
+document.addEventListener('astro:page-load', () => {
+	lightbox.init()
+})
+
+document.addEventListener('astro:before-swap', () => {
+	lightbox.destroy()
+})
 </script>
