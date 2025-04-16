@@ -37,6 +37,15 @@ const stickers = [
 import { animate, inView, press, stagger } from 'motion'
 
 document.addEventListener('astro:page-load', () => {
+	inView('#stickers', () => {
+		animate('#stickers .motion-sticker', {
+			opacity: [0, 1],
+			scale: [0.8, 1],
+		}, {
+			delay: stagger(0.1),
+		})
+	})
+
 	press('#stickers .motion-sticker', (element) => {
 		animate(element, {
 			scale: 0.8,
@@ -47,15 +56,6 @@ document.addEventListener('astro:page-load', () => {
 				scale: 1,
 			})
 		}
-	})
-})
-
-inView('#stickers', () => {
-	animate('#stickers .motion-sticker', {
-		opacity: [0, 1],
-		scale: [0.8, 1],
-	}, {
-		delay: stagger(0.1),
 	})
 })
 </script>
