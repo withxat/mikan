@@ -1,4 +1,5 @@
 ---
+import LoadingIndicator from 'astro-loading-indicator/component'
 import { ClientRouter } from 'astro:transitions'
 
 import { css } from '@/assets/font/calling-code.otf'
@@ -21,6 +22,7 @@ const { description, tag, title } = Astro.props
 <html lang="en">
 	<head>
 		<ClientRouter />
+		<LoadingIndicator color="var(--foreground)" />
 		<meta charset="UTF-8" />
 		<link href="/sitemap-index.xml" rel="sitemap" />
 		<script is:inline data-website-id="0b3c909d-3680-47f1-88f1-ae337236d0cd" src="https://cloud.umami.is/script.js" type="text/partytown"></script>
