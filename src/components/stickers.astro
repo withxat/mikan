@@ -23,7 +23,7 @@ const stickers = [
 	{stickers.map((sticker, index) => (
 		<Image
 			class={cn(
-				'size-8 motion-sticker opacity-0',
+				'size-8 motion-sticker opacity-0 print:opacity-100',
 				index % 2 === 0 ? 'rotate-12' : '-rotate-12',
 			)}
 			alt="Sticker"

@@ -30,7 +30,7 @@ const { Content } = await render(post)
 ---
 
 <RootLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
-	<div class="prose font-sans py-2 mx-4 prose-img:opacity-0" id="post">
+	<div class="prose font-sans py-2 mx-4 prose-img:opacity-0 print:prose-img:opacity-100" id="post">
 		{post && (
 			<Content components={{ img: Imagex }} />
 		)}
