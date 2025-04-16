@@ -55,13 +55,12 @@ const { Content } = await render(post)
 </script>
 
 <script>
-import { animate } from 'motion'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 
 import 'photoswipe/style.css'
 
 const lightbox = new PhotoSwipeLightbox({
-	bgOpacity: 0.5,
+	bgOpacity: 0,
 	close: false,
 	gallery: '#post a:has(img)',
 	mainClass: 'lightbox',
@@ -78,11 +77,6 @@ const lightbox = new PhotoSwipeLightbox({
 
 document.addEventListener('astro:page-load', () => {
 	lightbox.init()
-	animate('.lightbox', {
-		backdropFilter: 'blur(4px)',
-	}, {
-		duration: 0.2,
-	})
 })
 
 document.addEventListener('astro:before-swap', () => {
