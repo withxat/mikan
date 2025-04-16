@@ -27,6 +27,11 @@
 	box-shadow: var(--btn-inner-shadow);
 }
 
+@utility lightbox {
+	transition: backdrop-filter 0.2s ease-in-out;
+	backdrop-filter: blur(4px);
+}
+
 @theme inline {
 	--color-brand: var(--brand);
 	--color-decoration: var(--decoration);

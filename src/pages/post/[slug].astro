@@ -55,18 +55,33 @@ const { Content } = await render(post)
 </script>
 
 <script>
+import { animate } from 'motion'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 
 import 'photoswipe/style.css'
 
 const lightbox = new PhotoSwipeLightbox({
-	children: 'a:has(img)',
-	gallery: '#post',
+	bgOpacity: 0.5,
+	close: false,
+	gallery: '#post a',
+	mainClass: 'lightbox',
+	padding: {
+		bottom: 10,
+		left: 10,
+		right: 10,
+		top: 10,
+	},
 	pswpModule: () => import('photoswipe'),
+	zoom: false,
 })
 
 document.addEventListener('astro:page-load', () => {
 	lightbox.init()
+	animate('.lightbox', {
+		backdropFilter: 'blur(4px)',
+	}, {
+		duration: 0.2,
+	})
 })
 
 document.addEventListener('astro:before-swap', () => {

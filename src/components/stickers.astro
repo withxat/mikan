@@ -23,7 +23,7 @@ const stickers = [
 	{stickers.map((sticker, index) => (
 		<Image
 			class={cn(
-				'size-8 motion-sticker',
+				'size-8 motion-sticker opacity-0',
 				index % 2 === 0 ? 'rotate-12' : '-rotate-12',
 			)}
 			alt="Sticker"
@@ -48,14 +48,14 @@ document.addEventListener('astro:page-load', () => {
 			})
 		}
 	})
+})
 
-	inView('#stickers', () => {
-		animate('#stickers .motion-sticker', {
-			opacity: [0, 1],
-			scale: [0.8, 1],
-		}, {
-			delay: stagger(0.1),
-		})
+inView('#stickers', () => {
+	animate('#stickers .motion-sticker', {
+		opacity: [0, 1],
+		scale: [0.8, 1],
+	}, {
+		delay: stagger(0.1),
 	})
 })
 </script>

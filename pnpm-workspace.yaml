@@ -1,7 +1,8 @@
 onlyBuiltDependencies:
   - cn-font-split
+  - esbuild
   - koffi
   - lefthook
   - protobufjs
   - sharp
-  - esbuild
+  - swup
