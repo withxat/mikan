@@ -43,7 +43,8 @@ const { description, tag, title } = Astro.props
 		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
 	</head>
 	<body class="antialiased relative" style={{ fontFamily: css.family }}>
-		<div class="absolute inset-0 bg-[url('/image/noise.png')]" />
+		<div class="bg-brand absolute inset-0 -z-20" />
+		<div class="absolute inset-0 bg-[url('/image/noise.png')] -z-10" />
 		<Header tag={tag} />
 		<Hero text={title} />
 		<Content>

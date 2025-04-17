@@ -23,6 +23,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@utility motion-char {
+	@apply opacity-0 print:opacity-100;
+}
+
 @utility btn-inner-shadow {
 	box-shadow: var(--btn-inner-shadow);
 }
@@ -114,7 +118,7 @@
 
 @layer base {
 	body {
-		@apply bg-brand text-brand-foreground scroll-smooth antialiased;
+		@apply text-brand-foreground scroll-smooth antialiased;
 		::selection {
 			@apply bg-brand-foreground text-brand;
 		}
