@@ -7,7 +7,7 @@ import Content from '@/components/content.astro'
 import Footer from '@/components/footer.astro'
 import Header from '@/components/header.astro'
 import Hero from '@/components/hero.astro'
-
+import CTA from '@/components/cta.astro'
 import '@/styles/globals.css'
 
 interface Props {
@@ -45,6 +45,7 @@ const { description, tag, title } = Astro.props
 	<body class="antialiased relative" style={{ fontFamily: css.family }}>
 		<div class="bg-brand absolute inset-0 -z-20" />
 		<div class="absolute inset-0 bg-[url('/image/noise.png')] -z-10" />
+		<CTA variant={title ? 'navigate' : 'contact'} />
 		<Header tag={tag} />
 		<Hero text={title} />
 		<Content>
