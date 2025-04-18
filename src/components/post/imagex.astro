@@ -16,11 +16,14 @@ const img = await getImage({
 })
 ---
 
+<div class="flex flex-col gap-0.5">
 <a
 	data-pswp-height={img.attributes.height}
 	data-pswp-width={img.attributes.width}
 	href={img.src}
 	target="_blank"
 >
-	<img alt={alt} loading="lazy" src={img.src} />
+	<img width={img.attributes.width} height={img.attributes.height} alt={alt} loading="lazy" src={img.src} />
 </a>
+<span class="text-inactive text-sm text-center leading-none mt-0">{alt}</span>
+</div>
