@@ -53,10 +53,10 @@
 	--foreground: #0A0A0A;
 	--brand: #F48037;
 	--secondary: #655134;
-	--inactive: #838281;
+	--inactive: #4C9F8D;
 	--tertiary: #D0B798;
 	--decoration: #F2ECE3;
-	--brand-foreground: var(--background);
+	--brand-foreground: white;
 	--radius: 0.625rem;
 	--btn-inner-shadow: inset 0px 1px 0px 0px #FFFFFF,
 	inset 0px -2px 0px 1px #00000029,

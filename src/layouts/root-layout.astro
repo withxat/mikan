@@ -1,15 +1,21 @@
 ---
 import LoadingIndicator from 'astro-loading-indicator/component'
 import { ClientRouter } from 'astro:transitions'
-
+import { getImage } from 'astro:assets'
 import { css } from '@/assets/font/calling-code.otf'
+import Noise from '@/assets/noise.png'
 import '@/styles/globals.css'
-
+import { cn } from '@/lib/utils'
 interface Props {
 	description?: string
 	tag?: string
 	title?: string
 }
+
+const noise = await getImage({
+	src: Noise,
+	format: 'webp',
+})
 
 const { description, title } = Astro.props
 ---
@@ -37,9 +43,9 @@ const { description, title } = Astro.props
 		</title>
 		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
 	</head>
-	<body class="antialiased relative" style={{ fontFamily: css.family }}>
+	<body class="antialiased relative" style={{ fontFamily: `${css.family}, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", var(--font-sans)` }}>
 		<div class="bg-brand absolute inset-0 -z-20" />
-		<div class="absolute inset-0 bg-[url('/image/noise.png')] -z-10" />
+		<div class="absolute inset-0 -z-10" style={{ backgroundImage: `url(${noise.src})` }} />
 		<slot />
 	</body>
 </html>

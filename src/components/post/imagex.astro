@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets'
+
 import type { ImageMetadata } from 'astro'
 
 import { getImage } from 'astro:assets'
@@ -13,17 +15,20 @@ const { alt, src }: Props = Astro.props
 const img = await getImage({
 	format: 'webp',
 	src,
+	densities: [0.7],
 })
+
 ---
 
 <div class="flex flex-col gap-0.5">
 <a
 	data-pswp-height={img.attributes.height}
 	data-pswp-width={img.attributes.width}
+	data-low-src={img.srcSet.values[0].url}
 	href={img.src}
 	target="_blank"
 >
-	<img width={img.attributes.width} height={img.attributes.height} alt={alt} loading="lazy" src={img.src} />
+	<Image class="w-full" width={img.srcSet.values[0].transform.width!} height={img.srcSet.values[0].transform.height!} alt={alt} src={img.srcSet.values[0].url} />
 </a>
 <span class="text-inactive text-sm text-center leading-none mt-0">{alt}</span>
 </div>

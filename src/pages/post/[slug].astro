@@ -35,7 +35,7 @@ const { Content } = await render(post)
 	<div class={cn(
 		'prose font-sans py-2 mx-4',
 		'prose-img:opacity-0 print:prose-img:opacity-100 prose-img:mt-0 prose-img:mb-2',
-		'prose-code:py-0.5 prose-code:mx-0.5 prose-code:text-xs prose-code:py-0.5 prose-code:before:hidden prose-code:after:hidden prose-code:mx-0.5 prose-code:text-xs prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-xs prose-code:text-secondary prose-code:py-0.5 prose-code:mx-0.5'
+		'prose-code:before:hidden prose-code:after:hidden prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-xs prose-code:text-secondary prose-code:py-0.5 prose-code:mx-0.5'
 	)} id="post">
 		{post && (
 			<Content components={{ img: Imagex }} />
@@ -79,6 +79,15 @@ const lightbox = new PhotoSwipeLightbox({
 	pswpModule: () => import('photoswipe'),
 	tapAction: 'close',
 	zoom: false,
+})
+
+lightbox.addFilter('domItemData', (itemData, _, linkEl) => {
+	const lowSrc = linkEl.getAttribute('data-low-src')
+	if (lowSrc) {
+		itemData.msrc = lowSrc
+	}
+	console.log(itemData)
+	return itemData
 })
 
 document.addEventListener('astro:page-load', () => {
