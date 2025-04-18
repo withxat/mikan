@@ -20,8 +20,14 @@
 		
 		press('#gohome', (element) => {
 			animate(element, {
-				scale: [1, 0],
-			}, { type: spring, duration: 0.5, delay: 0.5 })
+				scale: 0.9,
+			})
+
+			return () => {
+				animate(element, {
+					scale: 1,
+				})
+			}
 		})
 	})
 </script>
