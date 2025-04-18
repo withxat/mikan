@@ -11,23 +11,11 @@
 </a>
 
 <script>
-	import { animate, press, spring } from 'motion'
+	import { animate, spring } from 'motion'
 
 	document.addEventListener('astro:page-load', () => {
 		animate('#gohome', { 
 			x: [0, -136],
 		}, { type: spring, duration: 0.5, delay: 0.5 })
-		
-		press('#gohome', (element) => {
-			animate(element, {
-				scale: 0.9,
-			})
-
-			return () => {
-				animate(element, {
-					scale: 1,
-				})
-			}
-		})
 	})
 </script>
