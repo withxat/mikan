@@ -3,11 +3,6 @@ import LoadingIndicator from 'astro-loading-indicator/component'
 import { ClientRouter } from 'astro:transitions'
 
 import { css } from '@/assets/font/calling-code.otf'
-import Content from '@/components/content.astro'
-import Footer from '@/components/footer.astro'
-import Header from '@/components/header.astro'
-import Hero from '@/components/hero.astro'
-import CTA from '@/components/cta.astro'
 import '@/styles/globals.css'
 
 interface Props {
@@ -16,7 +11,7 @@ interface Props {
 	title?: string
 }
 
-const { description, tag, title } = Astro.props
+const { description, title } = Astro.props
 ---
 
 <html lang="en">
@@ -45,12 +40,6 @@ const { description, tag, title } = Astro.props
 	<body class="antialiased relative" style={{ fontFamily: css.family }}>
 		<div class="bg-brand absolute inset-0 -z-20" />
 		<div class="absolute inset-0 bg-[url('/image/noise.png')] -z-10" />
-		<CTA variant={title ? 'navigate' : 'contact'} />
-		<Header tag={tag} />
-		<Hero text={title} />
-		<Content>
-			<slot />
-		</Content>
-		<Footer />
+		<slot />
 	</body>
 </html>

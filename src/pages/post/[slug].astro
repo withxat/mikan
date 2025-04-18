@@ -2,7 +2,8 @@
 import { getCollection, getEntry, render } from 'astro:content'
 
 import Imagex from '@/components/post/imagex.astro'
-import RootLayout from '@/layouts/root-layout.astro'
+import Metadata from '@/components/post/metadata.astro'
+import PostLayout from '@/layouts/post-layout.astro'
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog')
@@ -29,8 +30,9 @@ if (!category) {
 const { Content } = await render(post)
 ---
 
-<RootLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
-	<div class="prose font-sans py-2 mx-4 prose-img:opacity-0 print:prose-img:opacity-100 prose-code:before:hidden prose-code:after:hidden" id="post">
+<PostLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
+	<Metadata publishedAt={post.data.publishedAt} tags={post.data.tags} />
+	<div class="prose font-sans py-2 mx-4 prose-img:opacity-0 print:prose-img:opacity-100 prose-code:before:hidden prose-code:after:hidden prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-xs prose-code:text-secondary prose-code:py-0.5 prose-code:mx-0.5" id="post">
 		{post && (
 			<Content components={{ img: Imagex }} />
 		)}
@@ -60,7 +62,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
 const lightbox = new PhotoSwipeLightbox({
-	bgOpacity: 0,
+	bgOpacity: 0.8,
 	close: false,
 	gallery: '#post a:has(img)',
 	mainClass: 'lightbox',

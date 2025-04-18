@@ -15,7 +15,7 @@ const latestPosts = posts.sort((a, b) => new Date(b.data.publishedAt).getTime() 
 			</a>
 		</div>
 		<a href="/post">
-			<button class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-2 py-1 rounded-sm bg-brand/15 sm:bg-none sm:hover:bg-brand/10 text-foreground/50">
+			<button class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-2 py-1 rounded-sm bg-brand text-brand-foreground">
 				<span>View All</span>
 				<span class="i-mingcute-arrow-right-line  w-4 ml-0.5 sm:ml-0 sm:w-0 sm:group-hover/button:w-4 sm:group-hover/button:ml-0.5 transition-all duration-200" />
 			</button>
@@ -26,7 +26,7 @@ const latestPosts = posts.sort((a, b) => new Date(b.data.publishedAt).getTime() 
 			<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10">
 				<a href={`/post/${post.id}`}>
 					<h4>{post.data.title}</h4>
-					<p class="opacity-50 text-sm">{post.data.summary}</p>
+					<p class="text-inactive text-sm">{post.data.summary}</p>
 				</a>
 			</li>
 		))}

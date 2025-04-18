@@ -30,15 +30,18 @@
 }
 
 @utility lightbox {
-	transition: backdrop-filter 0.2s ease-in-out;
-	backdrop-filter: blur(4px);
+	--pswp-bg: var(--background) !important;
 }
 
 @theme inline {
 	--color-brand: var(--brand);
 	--color-brand-foreground: var(--brand-foreground);
+	--color-decoration: var(--decoration);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
+	--color-secondary: var(--secondary);
+	--color-tertiary: var(--tertiary);
+	--color-inactive: var(--inactive);
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
@@ -46,15 +49,24 @@
 }
 
 :root {
-	--background: oklch(98.61% 0.003410304544855207 67.78358997664759);
-	--foreground: oklch(0.145 0 0);
-	--brand: oklch(71.92% 0.1648187316262081 49.2717689180094);
+	--background: #FCFAF8;
+	--foreground: #0A0A0A;
+	--brand: #F48037;
+	--secondary: #655134;
+	--inactive: #838281;
+	--tertiary: #D0B798;
+	--decoration: #F2ECE3;
 	--brand-foreground: var(--background);
 	--radius: 0.625rem;
-	--btn-inner-shadow: inset 0 -3px 2px -3px var(--brand);
+	--btn-inner-shadow: inset 0px 1px 0px 0px #FFFFFF,
+	inset 0px -2px 0px 1px #00000029,
+	0px 1px 2px -0.1px #00000026;
 }
 
 @layer base {
+	* {
+		@apply border-decoration outline-decoration/50;
+	}
 	body {
 		@apply text-brand-foreground scroll-smooth antialiased;
 		::selection {

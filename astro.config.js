@@ -8,6 +8,10 @@ import font from 'vite-plugin-font'
 
 export default defineConfig({
 	integrations: [partytown(), sitemap(), mdx(), compresser()],
+	prefetch: {
+		defaultStrategy: 'viewport',
+		prefetchAll: true,
+	},
 	site: 'https://xat.sh',
 	vite: {
 		plugins: [

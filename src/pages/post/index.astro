@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content'
 import { format } from 'date-fns'
 
-import RootLayout from '@/layouts/root-layout.astro'
+import PostLayout from '@/layouts/post-layout.astro'
 
 const posts = await getCollection('blog')
 
@@ -19,7 +19,7 @@ const variousPosts = categories.map((category) => {
 })
 ---
 
-<RootLayout description="All writings written by Xat" tag="Archive - Texts just sparkle in my mind" title="All Writings">
+<PostLayout description="All writings written by Xat" tag="Archive - Texts just sparkle in my mind" title="All Writings">
 	{variousPosts.map(category => (
 		<div class="flex items-center justify-between my-3">
 			<h3 class="font-bold text-brand leading-none tracking-wide ml-4 text-shadow-2xs">{category.category}</h3>
@@ -27,10 +27,10 @@ const variousPosts = categories.map((category) => {
 		<ul class="py-2 flex flex-col gap-1">
 			{category.posts.map(post => (
 				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10 relative">
-					<span class="absolute top-2 right-2 opacity-50">{format(post.data.publishedAt, 'yyyy-MM-dd')}</span>
+					<span class="absolute top-2 right-2 inset-shadow-2xs text-inactive text-xs border i px-1.5 py-0.5 rounded-sm bg-brand/10">{format(post.data.publishedAt, 'yyyy-MM-dd')}</span>
 					<a href={`/post/${post.data.slug}`}>
 						<h4>{post.data.title}</h4>
-						<p class="opacity-50 text-sm">{post.data.summary}</p>
+						<p class="text-inactive text-sm">{post.data.summary}</p>
 						<div class="flex items-center gap-2">
 							{post.data.tags.map(tag => (
 								<span class="text-xs">#{tag}</span>
@@ -41,4 +41,4 @@ const variousPosts = categories.map((category) => {
 			))}
 		</ul>
 	))}
-</RootLayout>
+</PostLayout>
