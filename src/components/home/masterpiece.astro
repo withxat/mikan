@@ -20,7 +20,7 @@ const projects = await getCollection('projects')
 				<a href={project.data.link} target="_blank">
 					<div class="flex items-center">
 						<h4>{project.data.title}</h4>
-						<span class="i-mingcute-arrow-right-up-line w-4 ml-1 sm:ml-0 sm:w-0 sm:group-hover/item:w-4 sm:group-hover/item:ml-1 transition-all duration-200" />
+						<span class="i-mingcute-arrow-right-up-line text-tertiary w-4 ml-1 sm:ml-0 sm:w-0 sm:group-hover/item:w-4 sm:group-hover/item:ml-1 transition-all duration-200 translate-y-[1px] -translate-x-[2px]" />
 					</div>
 					<p class="text-inactive text-sm">{project.data.description}</p>
 				</a>
