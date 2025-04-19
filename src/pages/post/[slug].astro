@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content'
 import { cn } from '@/lib/utils'
+import { css } from '@/assets/font/calling-code.otf'
 import Imagex from '@/components/post/imagex.astro'
 import Metadata from '@/components/post/metadata.astro'
 import PostLayout from '@/layouts/post-layout.astro'
@@ -35,8 +36,15 @@ const { Content } = await render(post)
 	<div class={cn(
 		'prose font-sans py-2 mx-4',
 		'prose-img:opacity-0 print:prose-img:opacity-100 prose-img:mt-0 prose-img:mb-2',
-		'prose-code:before:hidden prose-code:after:hidden prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-xs prose-code:text-secondary prose-code:py-0.5 prose-code:mx-0.5'
-	)} id="post">
+		'prose-code:before:hidden prose-code:after:hidden prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-xs prose-code:text-secondary prose-code:py-0.5 prose-code:mx-0.5',
+		'prose-a:text-secondary prose-a:underline prose-a:underline-offset-4',
+		'prose-p:hyphens-auto',
+		'prose-headings:mt-0'
+	)} 
+	style={{
+		'--default-mono-font-family': css.family,
+	}}
+	id="post">
 		{post && (
 			<Content components={{ img: Imagex }} />
 		)}
