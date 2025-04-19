@@ -13,6 +13,7 @@ export default defineConfig({
 		prefetchAll: true,
 	},
 	site: 'https://xat.sh',
+	trailingSlash: 'never',
 	vite: {
 		plugins: [
 			tailwindcss(),
