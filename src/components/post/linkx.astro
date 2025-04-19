@@ -1,0 +1,10 @@
+---
+import type { JSX } from 'astro/jsx-runtime'
+
+type Props = JSX.AnchorHTMLAttributes
+
+const { ...props } = Astro.props
+---
+
+<a {...props}><slot /></a>
+<span class="text-tertiary leading-none">↗</span>
