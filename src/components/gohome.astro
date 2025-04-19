@@ -1,5 +1,6 @@
 <a
 	transition:persist
+	data-triggered="false"
 	class="-right-30 top-4 z-20 fixed"
 	href="/"
 	id="gohome"
@@ -16,8 +17,11 @@
 	import { animate, spring } from 'motion'
 
 	document.addEventListener('astro:page-load', () => {
-		animate('#gohome', {
-			x: [0, -136],
-		}, { delay: 0.5, duration: 0.5, type: spring })
+		if (document.querySelector('#gohome')!.getAttribute('data-triggered') === 'false') {
+			animate('#gohome', {
+				x: [0, -136],
+			}, { delay: 0.5, duration: 0.5, type: spring })
+			document.querySelector('#gohome')!.setAttribute('data-triggered', 'true')
+		}
 	})
 </script>
