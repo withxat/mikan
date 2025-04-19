@@ -49,18 +49,16 @@
 }
 
 :root {
-	--background: #FCFAF8;
-	--foreground: #0A0A0A;
-	--brand: #F48037;
+	--background: #fcfaf8;
+	--foreground: #0a0a0a;
+	--brand: #f48037;
 	--secondary: #655134;
-	--inactive: #4C9F8D;
-	--tertiary: #D0B798;
-	--decoration: #FBEEE5;
+	--inactive: #4c9f8d;
+	--tertiary: #d0b798;
+	--decoration: #fbeee5;
 	--brand-foreground: white;
 	--radius: 0.625rem;
-	--btn-inner-shadow: inset 0px 1px 0px 0px #FFFFFF,
-	inset 0px -2px 0px 1px #00000029,
-	0px 1px 2px -0.1px #00000026;
+	--btn-inner-shadow: inset 0px 1px 0px 0px #ffffff, inset 0px -2px 0px 1px #00000029, 0px 1px 2px -0.1px #00000026;
 }
 
 @layer base {
@@ -76,8 +74,8 @@
 }
 
 @layer base {
-  body {
-    @apply bg-brand text-brand-foreground;
+	body {
+		@apply bg-brand text-brand-foreground;
 		::selection {
 			@apply bg-brand-foreground text-brand;
 		}

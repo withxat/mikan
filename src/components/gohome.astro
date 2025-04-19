@@ -1,10 +1,11 @@
-<a href="/"  
-	class='-right-30 top-4 z-20 fixed'
-	id='gohome'
+<a
 	transition:persist
+	class="-right-30 top-4 z-20 fixed"
+	href="/"
+	id="gohome"
 >
-	<button 
-		class='btn-inner-shadow border border-brand rounded-md px-2 py-1 text-sm inline-flex items-center gap-2 text-orange-700 bg-background'
+	<button
+		class="btn-inner-shadow border border-brand rounded-md px-2 py-1 text-sm inline-flex items-center gap-2 text-secondary bg-background"
 	>
 		<span class="i-mingcute-left-line" />
 		Go to home
@@ -15,8 +16,8 @@
 	import { animate, spring } from 'motion'
 
 	document.addEventListener('astro:page-load', () => {
-		animate('#gohome', { 
+		animate('#gohome', {
 			x: [0, -136],
-		}, { type: spring, duration: 0.5, delay: 0.5 })
+		}, { delay: 0.5, duration: 0.5, type: spring })
 	})
 </script>

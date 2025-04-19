@@ -14,17 +14,17 @@ const { publishedAt, tags }: Props = Astro.props
 	<div class="flex items-center px-3">
 		<span class="basis-5/12 flex items-center gap-2">
 			<span class="i-mingcute-calendar-fill" />
-			<span class='text-secondary text-xs'>Published At</span>
+			<span class="text-secondary text-xs">Published At</span>
 		</span>
 		<span class="text-xs text-secondary bg-white rounded-md px-2 py-1 border border-tertiary">{format(publishedAt, 'yyyy-MM-dd')}</span>
 	</div>
 	<div class="flex items-center px-3">
 		<span class="basis-5/12 flex items-center gap-2">
 			<span class="i-mingcute-tag-fill" />
-			<span class='text-secondary text-xs'>Tags</span>
+			<span class="text-secondary text-xs">Tags</span>
 		</span>
 		<div class="flex items-center gap-2 flex-wrap">
-			{tags.map((tag) => (
+			{tags.map(tag => (
 				<span class="text-xs text-secondary rounded-md px-2 py-1 bg-white border border-tertiary">{tag}</span>
 			))}
 		</div>

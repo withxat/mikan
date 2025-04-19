@@ -1,18 +1,18 @@
 ---
-import Content from "@/components/content.astro";
-import Footer from "@/components/footer.astro";
-import Header from "@/components/header.astro";
-import Hero from "@/components/hero.astro";
-import GoHome from "@/components/gohome.astro";
-import RootLayout from "@/layouts/root-layout.astro";
+import Content from '@/components/content.astro'
+import Footer from '@/components/footer.astro'
+import GoHome from '@/components/gohome.astro'
+import Header from '@/components/header.astro'
+import Hero from '@/components/hero.astro'
+import RootLayout from '@/layouts/root-layout.astro'
 
 interface Props {
-	title: string
-	tag: string
 	description: string
-}	
+	tag: string
+	title: string
+}
 
-const { title, tag, description }: Props = Astro.props
+const { description, tag, title }: Props = Astro.props
 ---
 
 <RootLayout description={description} title={title}>

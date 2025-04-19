@@ -1,11 +1,13 @@
 ---
 import LoadingIndicator from 'astro-loading-indicator/component'
-import { ClientRouter } from 'astro:transitions'
 import { getImage } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
+
 import { css } from '@/assets/font/calling-code.otf'
 import Noise from '@/assets/noise.png'
+
 import '@/styles/globals.css'
-import { cn } from '@/lib/utils'
+
 interface Props {
 	description?: string
 	tag?: string
@@ -13,8 +15,8 @@ interface Props {
 }
 
 const noise = await getImage({
-	src: Noise,
 	format: 'webp',
+	src: Noise,
 })
 
 const { description, title } = Astro.props
@@ -52,12 +54,13 @@ const { description, title } = Astro.props
 
 <script>
 	import { animate, press } from 'motion'
+
 	document.addEventListener('astro:page-load', () => {
 		press('button', (element) => {
 			animate(element, {
 				scale: 0.9,
 			})
-			
+
 			return () => {
 				animate(element, {
 					scale: 1,
