@@ -41,19 +41,21 @@ const { text } = Astro.props;
 </h2>
 
 <script>
-import { animate, stagger } from 'motion'
+import { animate, delay, stagger } from 'motion'
 
 document.addEventListener('astro:page-load', () => {
-	animate(
-		'.motion-char',
-		{
-			filter: ['blur(10px)', 'none'],
-			opacity: [0, 1],
-			y: [10, 0],
-		},
-		{
-			delay: stagger(0.05),
-		},
-	)
+	delay(() => {
+		animate(
+			'.motion-char',
+			{
+				filter: ['blur(10px)', 'none'],
+				opacity: [0, 1],
+				y: [10, 0],
+			},
+			{
+				delay: stagger(0.05),
+			},
+		)
+	}, 1)
 })
 </script>

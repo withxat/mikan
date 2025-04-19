@@ -13,9 +13,6 @@ const { tag } = Astro.props
 	class="flex flex-col gap-1 p-4 text-3xl leading-none font-bold sm:w-xl sm:mx-auto"
 	id="header"
 >
-	<a class="flex gap-1" href="/">
-		<span class="i-mingcute-sparkles-2-fill text-brand-foreground -translate-y-[2px]" />
-		<h1 class="leading-none" style={{ fontFamily: css.family }}>Xat</h1>
-	</a>
+	<h1 class="leading-none inline-flex items-center gap-1" style={{ fontFamily: css.family }}><span class="i-mingcute-sparkles-2-fill text-brand-foreground -translate-y-[2px]" />Xat</h1>
 	<Tag tag={tag} />
 </header>

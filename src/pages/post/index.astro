@@ -26,7 +26,7 @@ const variousPosts = categories.map((category) => {
 		</div>
 		<ul class="py-2 flex flex-col gap-1">
 			{category.posts.map(post => (
-				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10 relative">
+				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10 relative pressable">
 					<span class="absolute top-2 right-2 inset-shadow-2xs text-inactive text-xs border i px-1.5 py-0.5 rounded-sm bg-brand/10">{format(post.data.publishedAt, 'yyyy-MM-dd')}</span>
 					<a href={`/post/${post.data.slug}`}>
 						<h4>{post.data.title}</h4>

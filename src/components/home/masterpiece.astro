@@ -16,7 +16,7 @@ const projects = await getCollection('projects')
 	</div>
 	<ul class="flex flex-col gap-1">
 		{projects.map(project => (
-			<li class="group/item mx-2 px-2 py-2 rounded-sm hover:bg-brand/10">
+			<li class="group/item mx-2 px-2 py-2 rounded-sm hover:bg-decoration pressable">
 				<a href={project.data.link} target="_blank">
 					<div class="flex items-center">
 						<h4>{project.data.title}</h4>

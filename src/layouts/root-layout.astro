@@ -45,7 +45,7 @@ const { description, title } = Astro.props
 		</title>
 		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
 	</head>
-	<body class="antialiased relative" style={{ fontFamily: `${css.family}, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", var(--font-sans)` }}>
+	<body class="antialiased relative min-h-screen" style={{ fontFamily: `${css.family}, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", var(--font-sans)` }}>
 		<div class="bg-brand absolute inset-0 -z-20" />
 		<div class="absolute inset-0 -z-10" style={{ backgroundImage: `url(${noise.src})` }} />
 		<slot />
@@ -56,9 +56,22 @@ const { description, title } = Astro.props
 	import { animate, press } from 'motion'
 
 	document.addEventListener('astro:page-load', () => {
+		press('.pressable', (element) => {
+			animate(element, {
+				backgroundColor: ['var(--decoration)'],
+				scale: 0.95,
+			})
+
+			return () => {
+				animate(element, {
+					scale: 1,
+				})
+			}
+		})
+
 		press('button', (element) => {
 			animate(element, {
-				scale: 0.9,
+				scale: 0.95,
 			})
 
 			return () => {
