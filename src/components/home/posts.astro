@@ -11,7 +11,7 @@ const latestPosts = posts.sort((a, b) => new Date(b.data.publishedAt).getTime() 
 		<div class="inline-flex items-center gap-2">
 			<h3 class="font-bold text-brand leading-none tracking-wide ml-4 text-shadow-2xs">Writing</h3>
 			<a class="p-1" href="/feed.xml" aria-label="RSS Feed">
-				<button class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-1 py-1 rounded-sm bg-brand text-brand-foreground">
+				<button aria-label="RSS Feed" class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-1 py-1 rounded-sm bg-brand text-brand-foreground">
 					<span class="i-mingcute-rss-2-line text-sm leading-none" />
 				</button>
 			</a>
