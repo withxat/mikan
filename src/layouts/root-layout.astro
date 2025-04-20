@@ -58,7 +58,6 @@ const { description, title } = Astro.props
 	document.addEventListener('astro:page-load', () => {
 		press('.pressable', (element) => {
 			animate(element, {
-				backgroundColor: ['var(--decoration)'],
 				scale: 0.95,
 			})
 
