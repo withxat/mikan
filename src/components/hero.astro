@@ -7,6 +7,7 @@ const { text } = Astro.props;
 ---
 
 <h2
+	transition:persist
 	aria-label={text ?? 'I create clean design and build it to life'}
 	class="px-4 pb-12 pt-4 text-shadow text-xl sm:w-xl sm:mx-auto"
 	id="slogan"
@@ -43,13 +44,23 @@ const { text } = Astro.props;
 <script>
 import { animate, delay, stagger } from 'motion'
 
+document.addEventListener('astro:before-preparation', () => {
+	animate(
+		'.motion-char',
+		{
+			opacity: [1, 0],
+			scale: [1, 0.9],
+		},
+	)
+})
+
 document.addEventListener('astro:page-load', () => {
 	delay(() => {
 		animate(
 			'.motion-char',
 			{
 				opacity: [0, 1],
-				y: [10, 0],
+				scale: [0.9, 1],
 			},
 			{
 				delay: stagger(0.05),
