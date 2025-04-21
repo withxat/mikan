@@ -63,7 +63,6 @@ const { Content } = await render(post)
 	document.addEventListener('astro:page-load', () => {
 		inView('#post img', (element) => {
 			animate(element, {
-				filter: ['blur(4px)', 'none'],
 				opacity: [0, 1],
 				scale: [0.9, 1],
 				y: [10, 0],
