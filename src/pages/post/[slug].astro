@@ -37,9 +37,9 @@ const { Content } = await render(post)
 	<Metadata publishedAt={post.data.publishedAt} tags={post.data.tags} />
 	<div
 		class={cn(
-			'prose py-2 mx-4 font-sans',
+			'prose py-2 mx-4 font-sans *:hyphens-auto',
 			'prose-img:opacity-0 print:prose-img:opacity-100 prose-img:mt-0 prose-img:mb-2 prose-img:rounded-sm prose-img:border',
-			'prose-code:before:hidden prose-code:after:hidden prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-base prose-code:text-secondary prose-code:py-0.5 prose-code:mx-0.5',
+			'prose-code:before:hidden prose-code:after:hidden prose-code:text-[15px] prose-code:bg-decoration prose-code:rounded-sm prose-code:px-1.5 prose-code:text-secondary prose-code:pb-0.5 prose-code:pt-[3px] prose-code:font-normal prose-code:mx-0.5',
 			'prose-a:text-secondary prose-a:underline prose-a:underline-offset-4 prose-a:decoration-tertiary prose-a:decoration-1',
 			'prose-p:hyphens-auto',
 			'prose-headings:not-first:mt-[1.5em] prose-headings:not-first:scroll-mt-[1em] prose-headings:not-first:mb-[1em]',
