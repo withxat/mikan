@@ -1,0 +1,20 @@
+---
+import type { JSX } from 'astro/jsx-runtime'
+
+import { cn } from '@/lib/utils'
+
+type Props = JSX.IntrinsicElements['pre']
+
+const { class: className, ...props } = Astro.props
+
+const language = props['data-language'] || 'plaintext'
+
+---
+
+<pre
+	class={cn(
+		'border border-tertiary rounded-md p-4',
+		className,
+	)}
+	{...props}
+><slot data-block="true" /></pre>

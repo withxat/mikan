@@ -8,21 +8,24 @@ const posts = await getCollection('blog')
 
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 
-const categories = posts.map(post => post.data.category)
+const categories = await getCollection('categories')
 
-const variousPosts = categories.map((category) => {
-	const posts = sortedPosts.filter(post => post.data.category === category)
-	return {
-		category,
-		posts,
+const variousPosts = categories.flatMap((category) => {
+	const posts = sortedPosts.filter(post => post.data.category === category.data.slug)
+	if (posts.length > 0) {
+		return {
+			category,
+			posts,
+		}
 	}
+	return []
 })
 ---
 
 <PostLayout description="All writings written by Xat" tag="Archive - Texts just sparkle in my mind" title="All Writings">
 	{variousPosts.map(category => (
 		<div class="flex items-center justify-between my-3">
-			<h3 class="font-bold text-brand leading-none tracking-wide ml-4 text-shadow-2xs">{category.category}</h3>
+			<h3 class="font-bold text-brand leading-none tracking-wide ml-4 text-shadow-2xs">{category.category.data.name}</h3>
 		</div>
 		<ul class="py-2 flex flex-col gap-1">
 			{category.posts.map(post => (

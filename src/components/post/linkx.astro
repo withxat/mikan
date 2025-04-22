@@ -1,10 +1,12 @@
 ---
 import type { JSX } from 'astro/jsx-runtime'
 
-type Props = JSX.AnchorHTMLAttributes
+import { cn } from '@/lib/utils'
 
-const { ...props } = Astro.props
+type Props = JSX.IntrinsicElements['a']
+
+const { class: className, ...props } = Astro.props
 ---
 
-<a {...props}><slot /></a>
+<a {...props} class={cn('text-primary', className)}><slot /></a>
 <span class="i-mingcute-arrow-right-up-line text-tertiary translate-y-[3px] -translate-x-[2px]" />

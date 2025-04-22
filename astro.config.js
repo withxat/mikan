@@ -7,7 +7,29 @@ import { defineConfig } from 'astro/config'
 import font from 'vite-plugin-font'
 
 export default defineConfig({
-	integrations: [partytown(), sitemap(), mdx(), compresser()],
+	integrations: [
+		partytown(),
+		sitemap(),
+		mdx(),
+		compresser(),
+	],
+	markdown: {
+		shikiConfig: {
+			langAlias: {
+				eslint: 'typescript',
+				git: 'shell',
+				github: 'yaml',
+				ignore: 'plaintext',
+				license: 'plaintext',
+				nest: 'typescript',
+				pnpm: 'shell',
+				react: 'tsx',
+				robot: 'plaintext',
+				tailwind: 'css',
+			},
+			theme: 'catppuccin-mocha',
+		},
+	},
 	prefetch: {
 		defaultStrategy: 'viewport',
 		prefetchAll: true,
