@@ -30,8 +30,8 @@ export async function GET(context: APIContext) {
 		posts.map(async post => ({
 			content: String(await processor.process(post.body)),
 			description: post.data.summary,
-			link: `${context.site!.origin}/post/${post.data.slug}`,
-			pubDate: post.data.publishedAt,
+			link: `${context.site!.origin}/post/${post.id}`,
+			pubDate: post.data.date,
 			title: post.data.title,
 		})),
 	)
@@ -40,6 +40,7 @@ export async function GET(context: APIContext) {
 		description: DESCRIPTION,
 		items,
 		site: context.site!.origin,
+		stylesheet: '/rss.xsl',
 		title: TITLE,
 		trailingSlash: false,
 	})
