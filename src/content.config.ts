@@ -5,8 +5,7 @@ const blog = defineCollection({
 	loader: glob({ base: './contents/posts', pattern: '**/*.mdx' }),
 	schema: z.object({
 		category: z.string(),
-		publishedAt: z.date(),
-		slug: z.string(),
+		date: z.date(),
 		summary: z.string(),
 		tags: z.array(z.string()),
 		title: z.string(),

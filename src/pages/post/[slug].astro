@@ -5,6 +5,7 @@ import { css } from '@/assets/font/calling-code.otf'
 import Imagex from '@/components/post/imagex.astro'
 import Linkx from '@/components/post/linkx.astro'
 import Metadata from '@/components/post/metadata.astro'
+import Quotex from '@/components/post/quotex.astro'
 import PostLayout from '@/layouts/post-layout.astro'
 import { cn } from '@/lib/utils'
 
@@ -34,7 +35,7 @@ const { Content } = await render(post)
 ---
 
 <PostLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
-	<Metadata publishedAt={post.data.publishedAt} tags={post.data.tags} />
+	<Metadata publishedAt={post.data.date} tags={post.data.tags} />
 	<div
 		class={cn(
 			'prose py-2 mx-4 font-sans *:hyphens-auto',
@@ -45,6 +46,7 @@ const { Content } = await render(post)
 			'prose-headings:not-first:mt-[1.5em] prose-headings:not-first:scroll-mt-[1em] prose-headings:not-first:mb-[1em]',
 			'prose-h2:text-secondary prose-h2:font-bold prose-h2:text-[1.725rem]',
 			'prose-h3:font-bold prose-h3:text-[1.125rem]',
+			'prose-blockquote:bg-decoration prose-blockquote:rounded-sm prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:font-medium prose-blockquote:text-base prose-blockquote:border-l-0 prose-blockquote:*:before:content-none prose-blockquote:*:after:content-none',
 		)}
 		style={{
 			'--default-mono-font-family': css.family,
@@ -52,7 +54,7 @@ const { Content } = await render(post)
 		id="post"
 	>
 		{post && (
-			<Content components={{ a: Linkx, img: Imagex }} />
+			<Content components={{ a: Linkx, blockquote: Quotex, img: Imagex }} />
 		)}
 	</div>
 </PostLayout>

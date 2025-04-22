@@ -6,7 +6,7 @@ import PostLayout from '@/layouts/post-layout.astro'
 
 const posts = await getCollection('blog')
 
-const sortedPosts = posts.sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 
 const categories = posts.map(post => post.data.category)
 
@@ -27,8 +27,8 @@ const variousPosts = categories.map((category) => {
 		<ul class="py-2 flex flex-col gap-1">
 			{category.posts.map(post => (
 				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10 relative pressable">
-					<span class="absolute top-2 right-2 inset-shadow-2xs text-inactive text-xs border i px-1.5 py-0.5 rounded-sm bg-brand/10">{format(post.data.publishedAt, 'yyyy-MM-dd')}</span>
-					<a href={`/post/${post.data.slug}`}>
+					<span class="absolute top-2 right-2 inset-shadow-2xs text-inactive text-xs border i px-1.5 py-0.5 rounded-sm bg-brand/10">{format(post.data.date, 'yyyy-MM-dd')}</span>
+					<a href={`/post/${post.id}`}>
 						<h4>{post.data.title}</h4>
 						<p class="text-inactive text-sm">{post.data.summary}</p>
 						<div class="flex items-center gap-2">
