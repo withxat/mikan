@@ -1,0 +1,138 @@
+---
+title: 聊聊 Vite、Rollup、esbuild 和 webpack
+date: 2025-04-23
+category: tech
+summary: 为了弄清简单的问题而 dive deeply，我就是这么一个奇怪的人。
+tags:
+  - Vite
+  - Rollup
+  - bundlers
+  - esbuild
+  - webpack
+---
+
+虽然很早就开始写 React，但我都是作为业余爱好来写，也都是用的 Next.js。
+
+原因无他，作为 React 文档中最推荐的框架，当然是紧跟主流啦。（虽然当时不会想到现在 X 上有一大批喷 Next.js/Vercel/RSC 的）
+
+第一次接触到 Vite 生态反而是因为 [Astro 1.0 的发布](https://astro.build/blog/astro-1/)。
+
+而去年 5 月开始正式工作之后，才着手开始写 Vite + React-Router 的项目，也在实践中一点点理解了一些核心的思想。
+
+## 构建工具而非框架
+
+框架（Framework）或者元框架（Meta-framework）更多是提供各种开箱即用的功能、提供更便利的开发工具和应付项目规模提升的能力。
+
+典型例子是像 Nuxt 和 Next.js 这样的全栈框架。
+
+而 Vite 只是作为一个构建工具，他的强大之处在于：
+
+1. 基于 Rollup 的插件系统，提供高可自定义的同时，又避免了过于繁琐的配置过程（点名 webpack）
+2. 基于 ESM，快速冷启动，开发按需加载，而不用重新全局构建（再次点名 webpack）
+3. 由于上面两点，原生的 HMR 优秀，能给开发者更好的开发体验
+
+Vite 不过度设计，只专注于构建过程，因此像 Remix、Astro、Tanstack Router 的框架纷纷选择在它的基础上继续开发框架。
+
+而这也引出一个关键要点。
+
+## 关注点分离
+
+关注点分离（Separation of Concerns，简称 SoC）是一个通用的设计原则，不仅在编程界有深远影响，在其他领域也同样适用。
+
+我们在学校的不同科目也可以被称为关注点分离，这就是为什么你会发现 理/化/生 三科其实是紧密相连的。
+
+我的一个 [Aha! moment](https://en.wikipedia.org/wiki/Eureka_effect) 就是在发现 TypeScript 和 Vite 协同工作原理的时候。
+
+一开始我并不理解，既然已经在 `tsconfig.json` 中配置好了 import alias，为什么还得在 `vite.config.js` 中再加上相关配置才能成功构建呢？
+
+<details>
+<summary>顺便一提，相关的争议也并不少</summary>
+<a href="https://github.com/vitejs/vite/issues/6828">
+Native support for tsconfig's paths resolution #6828
+</a>
+</details>
+
+我一开始认为的是：
+
+tsc 编译 -> Vite 打包 -> output
+
+但不是这样的，一个 Vite + TypeScript 的项目中，Vite 负责从 TypeScript 到 JavaScript 的全部编译过程，无论是 `dev` 还是 `build`。
+
+而 TypeScript 只负责提供类型检查，为你的 IDE 提供类型提示。
+
+这意味着，即使你的 TypeScript 文件里有报错，只要是能够成功编译（类似于 `tsc --noCheck` 的效果），Vite 都不管，因为它**不关心类型**！只负责构建！
+
+这也是为什么常见的 scripts 中，build 总是被定义为 `tsc --noEmit && vite build` 的原因。
+
+## 刀刃用好钢
+
+可能偏一下题？稍微讲讲 Vite 的设计思路或者称为成功之处。
+
+这个话题总绕不开 Vite 诞生时期的主流老大哥 webpack，就先讲讲 webpack 的背景。
+
+### webpack，曾经的救世主
+
+在 2010 年代，webpack 的统治地位源自：
+
+- 浏览器不支持 CommonJS，webpack 能打包成浏览器认识的格式（IIFE）
+- SPA 兴起，前端复杂度猛增，依赖多，代码量大，webpack 能全部整合到一个 js 文件里
+- 插件与 loader 系统让它几乎成处理任何文件（如图片，CSS 等）
+
+这似乎被称为前端工程化的开端，然而到 Vite 出现的时间，真正淘汰它的也正是它自己的特点：
+
+- **启动慢**：webpack 每次打包都是全量构建，对于大的项目，即使有 HMR 支持也仍然很慢
+- **配置复杂**：`webpack.config.js` 一个配置动辄几十行，对于新手太不友好（现在看某些 hc 还会写着熟悉 webpack 配置…，也是一种魔幻现实了）
+- **不适应生态**：我始终觉得真正杀死 webpack 的，是 ESM 的逐渐完善，HTTP/2 的普及，而全打包则显得有些多余
+
+### Vite, it's fast!
+
+聊回我们的主角——Vite，让 Vite 如此成功的两大助力分别是 Rollup 与 esbuild。
+
+我们来看看他们的特点：
+
+#### Rollup
+
+- **优点**
+  1. 基于 JavaScript，专注于模块打包，特色是树摇（tree-shaking），也是将这一概念发扬光大的一个项目（源自 Lisp，曾应用到 Google 的 Google Closure Tools 和 Dart 项目中）
+  2. 高度灵活的插件系统
+- **缺点**
+  1. 一次性打包所有代码
+  2. 打包速度较慢，尤其在大项目中，花太多时间在解析和连接依赖阶段
+  3. 性能受限于 Node.js 的单线程模型
+
+#### esbuild
+
+- **优点**
+  1. 用 Go 编写并编译成原生代码，支持多线程，解析和打包速度极快
+- **缺点**
+  1. 插件系统简单，自定义程度低
+  2. 牺牲优化换速度，输出代码相比 Rollup 稍大
+
+#### 精明的抉择
+
+Vite 的设计非常巧妙。
+
+首先它自己基于兼容 Rollup 插件的逻辑（而不直接调用 Rollup），实现了自己的一套插件系统。
+
+- 在开发阶段（`vite dev`）
+  Vite 首先使用 esbuild 预构建，高效快速的将你 node_modules 中的依赖编译成浏览器能够识别的 ESM，存放在 `node_modules/.vite/deps/${packageName}.js` 下，Vite 通过自己实现的的插件系统来相应浏览器发来的请求。
+
+- 在生产阶段（`vite build`）
+  Vite 直接将插件交给 Rollup，执行构建。
+
+于是 Vite 做到了两件很伟大的事情！
+
+在开发阶段，通过 esbuild 快速构建 node_modules 中的依赖项，通过自己实现的兼容 Rollup 的插件系统，执行插件，并支持 HMR（Rollup 只能全量构建）
+
+在生产阶段，将整个编译过程交给优化更好的 Rollup。
+
+同时将**开发**和**生产**的体验都做到了提升！
+
+## 面向未来
+
+截止今天（2025-3-5），关于 Vite 我了解到的最新消息是 [rolldown-vite](https://github.com/vitejs/rolldown-vite) ——使用基于 Rust 开发的 Rolldown 来替代逐渐遇到性能瓶颈的 Rollup。
+
+而 Evan You 在 2024 年因 Vite 启发发动的 [VoidZero](https://voidzero.dev/posts/announcing-voidzero-inc) 仍旧方兴未艾。
+
+无论如何，都期待 Vite 之后的发展。
+

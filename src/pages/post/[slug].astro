@@ -41,7 +41,7 @@ const { Content } = await render(post)
 		class={cn(
 			'prose py-2 mx-4 font-sans *:hyphens-auto',
 			'prose-img:opacity-0 print:prose-img:opacity-100 prose-img:mt-0 prose-img:mb-2 prose-img:rounded-sm prose-img:border',
-			'prose-code:before:hidden prose-code:after:hidden',
+			'prose-code:before:hidden prose-code:after:hidden prose-code:break-all',
 			'prose-code:not-[:where(pre_code)]:text-[15px] prose-code:not-[:where(pre_code)]:bg-decoration prose-code:not-[:where(pre_code)]:rounded-sm prose-code:not-[:where(pre_code)]:px-1.5 prose-code:not-[:where(pre_code)]:text-secondary prose-code:not-[:where(pre_code)]:pb-0.5 prose-code:not-[:where(pre_code)]:pt-[3px] prose-code:not-[:where(pre_code)]:font-normal prose-code:not-[:where(pre_code)]:mx-0.5',
 			'prose-a:text-secondary prose-a:underline prose-a:underline-offset-4 prose-a:decoration-tertiary prose-a:decoration-1',
 			'prose-p:hyphens-auto',
