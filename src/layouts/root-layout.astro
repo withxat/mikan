@@ -44,6 +44,11 @@ const { description, title } = Astro.props
 			{title ? `${title} - Xat` : 'Hi, Xat!'}
 		</title>
 		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
+		<meta content="website" property="og:type" />
+		<meta content="https://xat.sh/og-image.png" property="og:image" />
+		<meta content="https://xat.sh" property="og:url" />
+		<meta content="Hi, Xat!" property="og:title" />
+		<meta content={description ?? 'Code with Love, Exploring the World!'} property="og:description" />
 	</head>
 	<body class="antialiased relative min-h-screen" style={{ fontFamily: `${css.family}, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", var(--font-sans)` }}>
 		<div class="bg-brand absolute inset-0 -z-20" />
