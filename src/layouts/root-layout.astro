@@ -30,10 +30,6 @@ const { description, title } = Astro.props
 		<link href="/sitemap-index.xml" rel="sitemap" />
 		<script is:inline data-website-id="0b3c909d-3680-47f1-88f1-ae337236d0cd" src="https://cloud.umami.is/script.js" type="text/partytown"></script>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-		<link href="/favicon.ico" rel="icon" />
-		<link href="/apple-touch-icon.png" rel="apple-touch-icon" />
-		<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-		<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
 		<link
 			href={new URL('feed.xml', Astro.site)}
 			rel="alternate"
@@ -43,12 +39,14 @@ const { description, title } = Astro.props
 		<title>
 			{title ? `${title} - Xat` : 'Hi, Xat!'}
 		</title>
-		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
-		<meta content="website" property="og:type" />
+		<meta content="summary_large_image" property="twitter:card" />
+		<meta content="https://xat.sh/og-image/png" property="twitter:image" />
 		<meta content="https://xat.sh/og-image.png" property="og:image" />
-		<meta content="https://xat.sh" property="og:url" />
+		<meta content="Hi, Xat!" property="twitter:title" />
 		<meta content="Hi, Xat!" property="og:title" />
+		<meta content={description ?? 'Code with Love, Exploring the World!'} property="twitter:description" />
 		<meta content={description ?? 'Code with Love, Exploring the World!'} property="og:description" />
+		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
 	</head>
 	<body class="antialiased relative min-h-screen" style={{ fontFamily: `${css.family}, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", var(--font-sans)` }}>
 		<div class="bg-brand absolute inset-0 -z-20" />
