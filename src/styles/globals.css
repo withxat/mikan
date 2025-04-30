@@ -66,16 +66,7 @@
 		@apply border-decoration outline-decoration/50;
 	}
 	body {
-		@apply text-brand-foreground scroll-smooth antialiased;
-		::selection {
-			@apply bg-brand-foreground text-brand;
-		}
-	}
-}
-
-@layer base {
-	body {
-		@apply bg-brand text-brand-foreground;
+		@apply bg-brand text-brand-foreground scroll-smooth antialiased;
 		::selection {
 			@apply bg-brand-foreground text-brand;
 		}
