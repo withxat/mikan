@@ -39,12 +39,9 @@ const { description, title } = Astro.props
 		<title>
 			{title ? `${title} - Xat` : 'Hi, Xat!'}
 		</title>
-		<meta content="summary_large_image" property="twitter:card" />
-		<meta content="https://xat.sh/og-image/png" property="twitter:image" />
+		<meta content="summary_large_image" name="twitter:card" />
 		<meta content="https://xat.sh/og-image.png" property="og:image" />
-		<meta content="Hi, Xat!" property="twitter:title" />
 		<meta content="Hi, Xat!" property="og:title" />
-		<meta content={description ?? 'Code with Love, Exploring the World!'} property="twitter:description" />
 		<meta content={description ?? 'Code with Love, Exploring the World!'} property="og:description" />
 		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
 	</head>
