@@ -1,14 +1,19 @@
 ---
-import { cn } from '@/lib/utils';
+import { swup } from '@/lib/transition'
+import { cn } from '@/lib/utils'
+
+const transition = {
+	backwards: swup,
+	forwards: swup,
+}
 ---
 
 <div
 	class={cn(
 		'selection:bg-brand selection:text-brand-foreground relative bg-background text-foreground pt-2 pb-2 shadow flex flex-col gap-2',
-		'opacity-0 print:opacity-100',
 	)}
 	id="content"
-	transition:animate="none"
+	transition:animate={transition}
 	transition:name="content"
 >
 	<div
@@ -19,44 +24,3 @@ import { cn } from '@/lib/utils';
 		<slot />
 	</content>
 </div>
-
-<script>
-import { animate, spring } from 'motion'
-
-function getViewportHeight() {
-	return window.innerHeight
-}
-
-// Animate in with spring physics
-document.addEventListener('astro:page-load', () => {
-	const viewportHeight = getViewportHeight()
-	animate(
-		'#content,footer',
-		{
-			opacity: [0, 1],
-			y: [viewportHeight, 0],
-		},
-		{
-			delay: 0.5,
-			duration: 1,
-			type: spring,
-		},
-	)
-})
-
-// Animate out with spring physics
-document.addEventListener('astro:before-preparation', () => {
-	const viewportHeight = getViewportHeight()
-	animate(
-		'#content,footer',
-		{
-			opacity: [1, 0],
-			y: [0, viewportHeight],
-		},
-		{
-			duration: 0.5,
-			type: spring,
-		},
-	)
-})
-</script>

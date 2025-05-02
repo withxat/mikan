@@ -61,6 +61,42 @@
 	--btn-inner-shadow: inset 0px 1px 0px 0px #ffffff, inset 0px -2px 0px 1px #00000029, 0px 1px 2px -0.1px #00000026;
 }
 
+@keyframes swipe-down {
+	0% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(100vh);
+	}
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes swipe-up {
+	0% {
+		transform: translateY(100vh);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
 @layer base {
 	* {
 		@apply border-decoration outline-decoration/50;
