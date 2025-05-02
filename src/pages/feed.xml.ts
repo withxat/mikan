@@ -74,7 +74,7 @@ export async function GET(context: APIContext) {
 		description: DESCRIPTION,
 		items,
 		site: context.site!.origin,
-		// stylesheet: '/rss.xsl',
+		stylesheet: '/rss.xsl',
 		title: TITLE,
 		trailingSlash: false,
 	})
