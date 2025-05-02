@@ -6,3 +6,4 @@ onlyBuiltDependencies:
   - protobufjs
   - sharp
   - swup
+  - unrs-resolver
