@@ -12,6 +12,12 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 
+interface ImageAsset {
+	default: ImageMetadata
+}
+
+const allImages = import.meta.glob<ImageAsset>('../../contents/posts/image/**/*.{png,jpg,jpeg,gif,webp}')
+
 const processor = unified()
 	.use(remarkParse)
 	.use(remarkGfm)
@@ -21,6 +27,13 @@ const processor = unified()
 	.use(rehypeSanitize)
 	.use(rehypeStringify)
 
+async function getImageUrl(path: string) {
+	const img = await allImages[path]()
+	if (!img)
+		return null
+	return img.default
+}
+
 async function replaceImage(content: string) {
 	const images = content.match(/<img[^>]+src="([^"]+)"/g)
 	if (!images)
@@ -29,8 +42,11 @@ async function replaceImage(content: string) {
 	for (const img of images) {
 		const match = img.match(/src="([^"]+)"/)
 		if (match) {
-			const img = await import(/* @vite-ignore */ `../../contents/posts${match[1].replace(/^\./, '')}`)
-			const asset = await getImage({ format: 'webp', src: img.default })
+			const imgPath = `../../contents/posts${match[1].replace(/^\./, '')}`
+			const imgUrl = await getImageUrl(imgPath)
+			if (!imgUrl)
+				continue
+			const asset = await getImage({ format: 'webp', inferSize: true, src: imgUrl })
 			content = content.replace(match[1], asset.src)
 		}
 	}
