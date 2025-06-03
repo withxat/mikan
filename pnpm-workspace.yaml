@@ -1,4 +1,5 @@
 onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
   - cn-font-split
   - esbuild
   - koffi
