@@ -1,11 +1,5 @@
 ---
-import { swup } from '@/lib/transition'
 import { cn } from '@/lib/utils'
-
-const transition = {
-	backwards: swup,
-	forwards: swup,
-}
 ---
 
 <div
@@ -13,14 +7,13 @@ const transition = {
 		'selection:bg-brand selection:text-brand-foreground relative bg-background text-foreground pt-2 pb-2 shadow flex flex-col gap-2',
 	)}
 	id="content"
-	transition:animate={transition}
 	transition:name="content"
 >
 	<div
 		class="absolute z-10 -top-[9px] h-2.5 w-full overflow-hidden after:content-[''] after:absolute after:top-0 after:left-0 after:h-10 after:w-full after:bg-[url('/image/decoration.svg')] after:bg-repeat-x after:bg-contain"
 	>
 	</div>
-	<content class="sm:w-xl sm:mx-auto sm:border-x">
+	<content class="sm:w-2xl sm:mx-auto sm:border-x">
 		<slot />
 	</content>
 </div>
