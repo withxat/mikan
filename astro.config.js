@@ -27,7 +27,7 @@ export default defineConfig({
 				robot: 'plaintext',
 				tailwind: 'css',
 			},
-			theme: 'catppuccin-mocha',
+			theme: 'catppuccin-latte',
 		},
 	},
 	prefetch: {
