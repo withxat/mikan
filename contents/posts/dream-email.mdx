@@ -13,7 +13,7 @@ tags:
 
 我使用过腾讯企业邮箱，痛苦的登录验证劝退了我，后来转向 Skiff Mail，它有着很不错界面，虽然 iOS 端的 UI/UX 有些不合我的胃口，好在方便易用，但随着它被 Notion 收购，我也开始寻找替代方案。
 
-![Skiff Mail](./image/dream-email/skiff.png)
+![Skiff Mail](./image/dream-email/skiff.png "Skiff Mail")
 
 ## Selection
 
@@ -43,7 +43,7 @@ Cloudflare 提供了免费的 [邮件转发服务](https://www.cloudflare.com/de
 
 > 截止行文，Resend 提供了每月 3000 封邮件的免费额度，一天最多 100 封，对我自己用来说已经绰绰有余了。
 
-![Resend Price](./image/dream-email/resend-price.png)
+![Resend Price](./image/dream-email/resend-price.png "Resend Price")
 
 ### Apple Mail
 
@@ -51,7 +51,7 @@ Cloudflare 提供了免费的 [邮件转发服务](https://www.cloudflare.com/de
 
 在 iOS 17 和 macOS 14 后，可以自动复制邮件验证码的功能也很吸引人（然而效果并不好，大部分时间识别不了邮件里的验证码，似乎对于纯文本的邮件识别率更高一些）。
 
-![New features in macOS 14](./image/dream-email/mail-macos-14.png)
+![New features in macOS 14](./image/dream-email/mail-macos-14.png "New features in macOS 14")
 
 ## Configuration
 
@@ -69,7 +69,7 @@ Cloudflare 提供了免费的 [邮件转发服务](https://www.cloudflare.com/de
 4. 添加 `Routing rules`，可以像我选择 Catch-all，也就是任意 `xxx@yourdomain.com` 开头的邮箱都会转发
 5. 填写 `Destination` 为你的 Gmail 地址
 
-![Cloudflare Email Routing](./image/dream-email/cf-mail.png)
+![Cloudflare Email Routing](./image/dream-email/cf-mail.png "Cloudflare Email Routing")
 
 **需要注意的是，Catch-all 这里记得 Action 选择 `Send to an email`，默认似乎是 `Drop`，会直接丢弃邮件。**
 
@@ -81,14 +81,14 @@ Cloudflare 提供了免费的 [邮件转发服务](https://www.cloudflare.com/de
 2. 添加域名，验证域名
 3. 创建你的 API Key，记住这个 Key，他是之后我们配置 SMTP 时的密码。（如果你和我一样有强迫症的话可以像我图上这样限制一下权限）
 
-![Resend API Key](./image/dream-email/resend-key.png)
+![Resend API Key](./image/dream-email/resend-key.png "Resend API Key")
 
 ### Gmail 配置 SMTP
 
 1. 在 Gmail 设置里找到 `Accounts and Import`，在 `Send mail as` 里选择 `Add another email address`
-   ![Gmail Send mail as](./image/dream-email/gmail-send-as.png)
+   ![Gmail Send mail as](./image/dream-email/gmail-send-as.png "Gmail Send mail as")
 2. SMTP 信息填 Resend 给出的 [地址和端口](https://resend.com/docs/send-with-smtp#smtp-credentials)，密码则是你的 Resend API Key
-   ![Gmail SMTP](./image/dream-email/gmail-smtp.png)
+   ![Gmail SMTP](./image/dream-email/gmail-smtp.png "Gmail SMTP")
 3. 点击 `Next`，Gmail 会给你发送一封验证邮件，验证后就可以使用了，你也可以在 `Accounts and Import` 里设置其默认发送邮箱
 
 ## Client
@@ -100,20 +100,20 @@ Cloudflare 提供了免费的 [邮件转发服务](https://www.cloudflare.com/de
 接下来把域名邮箱配置到 Apple Mail 中吧。
 
 1. 首先要在 Google Account 里 [添加 App Password](https://myaccount.google.com/apppasswords)，这个密码是用来**在 Apple Mail 中登录 Gmail** 的。
-   ![Google App Password](./image/dream-email/google-app-pwd.png)
+   ![Google App Password](./image/dream-email/google-app-pwd.png "Google App Password")
 2. 在 Apple Mail 中添加账户，选择 `Other Mail Account`，填写你的域名邮箱，密码随意填写即可，这里只是触发编辑 SMTP 的界面。
-   ![Apple Mail 1](./image/dream-email/mail-1.png)
+   ![Apple Mail 1](./image/dream-email/mail-1.png "Apple Mail 1")
 3. 在 SMTP 编辑界面，IMAP 服务器填写 `imap.gmail.com`，SMTP 服务器填写 `smtp.resend.com`，用户名和密码填写你的 Gmail 地址和生成的 App Password 或是 `resend` 和 API Key，任选一套组合即可。
-   ![Apple Mail 2](./image/dream-email/mail-2.png)
+   ![Apple Mail 2](./image/dream-email/mail-2.png "Apple Mail 2")
 4. 保存后，你还需要为 IMAP 和 SMTP 分别设置不同的账户与密码，进入 Apple Mail 设置，账户，IMAP 使用 Gmail 地址和生成的 App Password，SMTP 使用 `resend` 和 API Key。
-   ![Apple Mail 3](./image/dream-email/mail-3.png)
+   ![Apple Mail 3](./image/dream-email/mail-3.png "Apple Mail 3")
 5. 即将完成啦，但还有一步，你要在 `Advanced IMAP Settings` 的 `IMAP Path Prefix` 里填上 `[Gmail]`，这样 Apple Mail 才能正确识别 Gmail 的文件夹。
-   ![Apple Mail 4](./image/dream-email/mail-4.png)
+   ![Apple Mail 4](./image/dream-email/mail-4.png "Apple Mail 4")
 6. 最后别忘了点右下角的 `Save`，然后就可以愉快地使用域名邮箱啦。
-   ![Final](./image/dream-email/final.png)
+   ![Final](./image/dream-email/final.png "Final")
 
 ## Conclusion
 
 Enjoy it!
 
-![New mail](./image/dream-email/new-mail.png)
+![New mail](./image/dream-email/new-mail.png "New mail")

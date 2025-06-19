@@ -6,9 +6,10 @@ import { getImage, Image } from 'astro:assets'
 interface Props {
 	alt: string
 	src: ImageMetadata | string
+	title?: string
 }
 
-const { alt, src }: Props = Astro.props
+const { alt, src, title }: Props = Astro.props
 
 const isExternal = typeof src === 'string' && src.startsWith('http')
 
@@ -33,5 +34,5 @@ const size = img.attributes
 	>
 		<Image inferSize alt={alt} class="w-full" height={isExternal ? size.height : img.srcSet.values[0].transform.height!} src={isExternal ? src : img.srcSet.values[0].url} width={isExternal ? size.width : img.srcSet.values[0].transform.width!} />
 	</a>
-	<span class="text-inactive text-sm text-center leading-none mt-0">{alt}</span>
+	<span class="text-inactive text-sm text-center leading-none mt-0">{title ?? alt}</span>
 </div>
