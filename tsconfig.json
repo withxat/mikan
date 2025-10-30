@@ -1,5 +1,5 @@
 {
-	"extends": "astro/tsconfigs/strict",
+	"extends": "@withxat/tsconfig",
 	"compilerOptions": {
 		"jsx": "react-jsx",
 		"jsxImportSource": "react",
@@ -9,8 +9,5 @@
 		"allowJs": true
 	},
 	"include": [".astro/types.d.ts", "**/*"],
-	"exclude": [
-		"node_modules",
-		"dist"
-	]
+	"exclude": ["dist"]
 }

@@ -32,10 +32,14 @@ if (!category) {
 	return
 }
 
-const { Content } = await render(post)
+const { Content } = await render(post);
 ---
 
-<PostLayout description={post.data.summary} tag={`${category.data.name} - ${category.data.description}`} title={post.data.title}>
+<PostLayout
+	description={post.data.summary}
+	tag={`${category.data.name} - ${category.data.description}`}
+	title={post.data.title}
+>
 	<Metadata publishedAt={post.data.date} tags={post.data.tags} />
 	<div
 		class={cn(
@@ -55,26 +59,39 @@ const { Content } = await render(post)
 		}}
 		id="post"
 	>
-		{post && (
-			<Content components={{ a: Linkx, blockquote: Quotex, img: Imagex, pre: CodeBlockx }} />
-		)}
+		{
+			post && (
+				<Content
+					components={{
+						a: Linkx,
+						blockquote: Quotex,
+						img: Imagex,
+						pre: CodeBlockx,
+					}}
+				/>
+			)
+		}
 	</div>
 </PostLayout>
 
 <script>
-	import { animate, inView } from 'motion'
+import { animate, inView } from 'motion'
 
-	document.addEventListener('astro:page-load', () => {
-		inView('#post img', (element) => {
-			animate(element, {
+document.addEventListener('astro:page-load', () => {
+	inView('#post img', (element) => {
+		animate(
+			element,
+			{
 				opacity: [0, 1],
 				scale: [0.9, 1],
 				y: [10, 0],
-			}, {
+			},
+			{
 				delay: 0.2,
-			})
-		})
+			},
+		)
 	})
+})
 </script>
 
 <script>
@@ -115,9 +132,3 @@ document.addEventListener('astro:before-swap', () => {
 	lightbox.destroy()
 })
 </script>
-
-<style>
-	div.expressive-code {
-		margin-bottom: 1rem;
-	}
-</style>
