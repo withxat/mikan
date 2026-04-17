@@ -17,7 +17,7 @@ const { publishedAt, tags }: Props = Astro.props
 			<span class="text-secondary text-xs">Date</span>
 		</span>
 		<div class="basis-7/12">
-			<span class="text-xs text-secondary bg-white rounded-md px-2 py-1 border border-tertiary">{format(publishedAt, 'yyyy-MM-dd')}</span>
+			<span class="text-xs text-secondary bg-surface rounded-md px-2 py-1 border border-tertiary">{format(publishedAt, 'yyyy-MM-dd')}</span>
 		</div>
 	</div>
 	<div class="flex items-start px-4 w-full">
@@ -27,7 +27,7 @@ const { publishedAt, tags }: Props = Astro.props
 		</span>
 		<div class="basis-7/12 flex items-center gap-2 flex-wrap">
 			{tags.map(tag => (
-				<span class="text-xs text-secondary rounded-md px-2 py-1 bg-white border border-tertiary">{tag}</span>
+				<span class="text-xs text-secondary rounded-md px-2 py-1 bg-surface border border-tertiary">{tag}</span>
 			))}
 		</div>
 	</div>

@@ -1,5 +1,17 @@
 [
 	{
+		"title": "Monorepo Template",
+		"id": "monorepo-template",
+		"description": "🍤 Just a template",
+		"link": "https://github.com/withxat/monorepo-template"
+	},
+	{
+		"title": "TSConfig",
+		"id": "tsconfig",
+		"description": "📒 A strict TypeScript configuration for modern project",
+		"link": "https://github.com/withxat/tsconfig"
+	},
+	{
 		"title": "ESLint-Config",
 		"id": "eslint-config",
 		"description": "🧃 Xat's ESLint config preset",

@@ -6,11 +6,11 @@ const projects = await getCollection('projects')
 
 <div class="py-2">
 	<div class="flex items-center justify-between my-3">
-		<h3 class="font-bold text-brand leading-none tracking-wide ml-4 text-shadow-2xs">Project</h3>
+		<h3 class="font-bold text-heading leading-none tracking-wide ml-4 text-shadow-2xs">Project</h3>
 		<a href="https://github.com/withxat" target="_blank">
 			<button class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-2 py-1 rounded-sm bg-brand text-brand-foreground">
 				<span>View All</span>
-				<span class="i-mingcute-arrow-right-line  w-4 ml-0.5 sm:ml-0 sm:w-0 sm:group-hover/button:w-4 sm:group-hover/button:ml-0.5 transition-all duration-200" />
+				<span class="i-mingcute-arrow-right-line  w-4 ml-0.5 sm:ml-0 sm:w-0 sm:group-hover/button:w-4 sm:group-hover/button:ml-0.5 transition-[width,margin] duration-200 ease-out" />
 			</button>
 		</a>
 	</div>
@@ -20,7 +20,7 @@ const projects = await getCollection('projects')
 				<a href={project.data.link} target="_blank">
 					<div class="flex items-center">
 						<h4>{project.data.title}</h4>
-						<span class="i-mingcute-arrow-right-up-line text-tertiary w-4 ml-1 sm:ml-0 sm:w-0 sm:group-hover/item:w-4 sm:group-hover/item:ml-1 transition-all duration-200 translate-y-[1px] -translate-x-[2px]" />
+						<span class="i-mingcute-arrow-right-up-line text-tertiary w-4 ml-1 sm:ml-0 sm:w-0 sm:group-hover/item:w-4 sm:group-hover/item:ml-1 transition-[width,margin] duration-200 ease-out translate-y-[1px] -translate-x-[2px]" />
 					</div>
 					<p class="text-inactive text-sm">{project.data.description}</p>
 				</a>

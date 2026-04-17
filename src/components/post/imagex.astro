@@ -32,7 +32,7 @@ const size = img.attributes
 		href={img.src}
 		target="_blank"
 	>
-		<Image inferSize alt={alt} class="w-full" height={isExternal ? size.height : img.srcSet.values[0].transform.height!} src={isExternal ? src : img.srcSet.values[0].url} width={isExternal ? size.width : img.srcSet.values[0].transform.width!} />
+		<Image alt={alt} class="w-full" height={isExternal ? size.height : img.srcSet.values[0].transform.height!} src={isExternal ? src : img.srcSet.values[0].url} width={isExternal ? size.width : img.srcSet.values[0].transform.width!} inferSize />
 	</a>
 	<span class="text-inactive text-sm text-center leading-none mt-0">{title ?? alt}</span>
 </div>

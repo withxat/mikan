@@ -1,9 +1,7 @@
 ---
-import LoadingIndicator from 'astro-loading-indicator/component'
-import { getImage } from 'astro:assets'
+import { Font, getImage } from 'astro:assets'
 import { ClientRouter } from 'astro:transitions'
 
-import { css } from '@/assets/font/calling-code.otf'
 import Noise from '@/assets/noise.png'
 
 import '@/styles/globals.css'
@@ -24,11 +22,12 @@ const { description, title } = Astro.props
 
 <html lang="en">
 	<head>
+		<Font cssVariable="--font-calling-code" />
+		<Font cssVariable="--font-fugaz-one" />
 		<ClientRouter />
-		<LoadingIndicator color="var(--secondary)" />
 		<meta charset="UTF-8" />
 		<link href="/sitemap-index.xml" rel="sitemap" />
-		<script is:inline data-website-id="0b3c909d-3680-47f1-88f1-ae337236d0cd" src="https://cloud.umami.is/script.js" type="text/partytown"></script>
+		<script data-website-id="0b3c909d-3680-47f1-88f1-ae337236d0cd" src="https://cloud.umami.is/script.js" type="text/partytown" is:inline></script>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 		<link
 			href={new URL('feed.xml', Astro.site)}
@@ -46,39 +45,38 @@ const { description, title } = Astro.props
 		<meta content={description ?? 'Code with Love, Exploring the World!'} property="og:description" />
 		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
 	</head>
-	<body class="antialiased relative min-h-screen" style={{ fontFamily: `${css.family}, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", var(--font-sans)` }}>
+	<body class="antialiased relative min-h-screen font-mono">
 		<div class="bg-brand absolute inset-0 -z-20" />
-		<div class="absolute inset-0 -z-10" style={{ backgroundImage: `url(${noise.src})` }} />
+		<div class="absolute inset-0 -z-10 dark:invert" style={{ backgroundImage: `url(${noise.src})` }} />
 		<slot />
 	</body>
 </html>
 
 <script>
-	import { animate, press } from 'motion'
+import { animate, press } from 'motion'
 
-	document.addEventListener('astro:page-load', () => {
-		press('.pressable', (element) => {
-			animate(element, {
-				scale: 0.95,
-			})
+const easeOut = [0.23, 1, 0.32, 1] as const
+const pressDown = { scale: 0.95 }
+const pressUp = { scale: 1 }
+const pressOpts = { duration: 0.15, easing: easeOut }
 
-			return () => {
-				animate(element, {
-					scale: 1,
-				})
-			}
-		})
+document.addEventListener('astro:page-load', () => {
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+	if (reducedMotion)
+		return
 
-		press('button', (element) => {
-			animate(element, {
-				scale: 0.95,
-			})
-
-			return () => {
-				animate(element, {
-					scale: 1,
-				})
-			}
-		})
+	press('.pressable', (element) => {
+		animate(element, pressDown, pressOpts)
+		return () => {
+			animate(element, pressUp, pressOpts)
+		}
 	})
+
+	press('button', (element) => {
+		animate(element, pressDown, pressOpts)
+		return () => {
+			animate(element, pressUp, pressOpts)
+		}
+	})
+})
 </script>

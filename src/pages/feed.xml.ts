@@ -34,15 +34,19 @@ async function getImageUrl(path: string) {
 	return img.default
 }
 
+const imageRegex = /<img[^>]+src="([^"]+)"/g
+const srcRegex = /src="([^"]+)"/
+const replaceRegex = /^\./
+
 async function replaceImage(content: string) {
-	const images = content.match(/<img[^>]+src="([^"]+)"/g)
+	const images = content.match(imageRegex)
 	if (!images)
 		return content
 
 	for (const img of images) {
-		const match = img.match(/src="([^"]+)"/)
+		const match = img.match(srcRegex)
 		if (match) {
-			const imgPath = `../../contents/posts${match[1].replace(/^\./, '')}`
+			const imgPath = `../../contents/posts${match[1].replace(replaceRegex, '')}`
 			const imgUrl = await getImageUrl(imgPath)
 			if (!imgUrl)
 				continue

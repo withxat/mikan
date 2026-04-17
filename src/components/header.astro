@@ -1,5 +1,4 @@
 ---
-import { css } from '@/assets/font/fugaz-one.ttf'
 import Tag from '@/components/tag.astro'
 
 interface Props {
@@ -13,6 +12,8 @@ const { tag } = Astro.props
 	class="flex flex-col gap-1 p-4 text-3xl leading-none font-bold sm:w-2xl sm:mx-auto mt-0.5"
 	id="header"
 >
-	<h1 transition:persist class="leading-none inline-flex items-center gap-1" style={{ fontFamily: css.family }}><span class="i-mingcute-sparkles-2-fill text-brand-foreground -translate-y-[2px]" />Xat</h1>
+	<div class="flex items-center justify-between">
+		<h1 class="leading-none inline-flex items-center gap-1 font-fugaz-one" transition:persist><span class="i-mingcute-sparkles-2-fill text-brand-foreground -translate-y-[2px]" />Xat</h1>
+	</div>
 	<Tag tag={tag} />
 </header>

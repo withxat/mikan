@@ -25,11 +25,11 @@ const variousPosts = categories.flatMap((category) => {
 <PostLayout description="All writings written by Xat" tag="Archive - Texts just sparkle in my mind" title="All Writings">
 	{variousPosts.map(category => (
 		<div class="flex items-center justify-between my-3">
-			<h3 class="font-bold text-brand leading-none tracking-wide ml-4 text-shadow-2xs">{category.category.data.name}</h3>
+			<h3 class="font-bold text-heading leading-none tracking-wide ml-4 text-shadow-2xs">{category.category.data.name}</h3>
 		</div>
 		<ul class="py-2 flex flex-col gap-1">
 			{category.posts.map(post => (
-				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-brand/10 pressable">
+				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-decoration pressable">
 					<a href={`/post/${post.id}`}>
 						<p class="text-xs text-secondary">{format(post.data.date, 'yyyy-MM-dd')}</p>
 						<h4>{post.data.title}</h4>

@@ -1,7 +1,6 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content'
 
-import { css } from '@/assets/font/calling-code.otf'
 import CodeBlockx from '@/components/post/codeblockx.astro'
 import Imagex from '@/components/post/imagex.astro'
 import Linkx from '@/components/post/linkx.astro'
@@ -43,20 +42,17 @@ const { Content } = await render(post);
 	<Metadata publishedAt={post.data.date} tags={post.data.tags} />
 	<div
 		class={cn(
-			'prose py-2 mx-4 font-sans *:hyphens-auto max-w-full',
+			'prose py-2 mx-4 font-sans *:hyphens-auto max-w-full dark:prose-invert',
 			'prose-img:opacity-0 print:prose-img:opacity-100 prose-img:mt-0 prose-img:mb-2 prose-img:rounded-sm prose-img:border',
-			'prose-code:before:hidden prose-code:after:hidden prose-code:break-all',
+			'prose-code:before:hidden prose-code:after:hidden prose-code:break-all prose-code:font-mono',
 			'prose-code:not-[:where(pre_code)]:text-[15px] prose-code:not-[:where(pre_code)]:bg-decoration prose-code:not-[:where(pre_code)]:rounded-sm prose-code:not-[:where(pre_code)]:px-1.5 prose-code:not-[:where(pre_code)]:text-secondary prose-code:not-[:where(pre_code)]:pb-0.5 prose-code:not-[:where(pre_code)]:pt-[3px] prose-code:not-[:where(pre_code)]:font-normal prose-code:not-[:where(pre_code)]:mx-0.5',
-			'prose-a:text-secondary prose-a:underline prose-a:underline-offset-4 prose-a:decoration-tertiary prose-a:decoration-1',
+			'prose-a:text-link prose-a:underline prose-a:underline-offset-4 prose-a:decoration-link-decoration prose-a:decoration-1',
 			'prose-p:hyphens-auto',
 			'prose-headings:not-first:mt-[1.5em] prose-headings:not-first:scroll-mt-[1em] prose-headings:not-first:mb-[1em]',
 			'prose-h2:text-secondary prose-h2:font-bold prose-h2:text-[1.725rem]',
 			'prose-h3:font-bold prose-h3:text-[1.125rem]',
 			'prose-blockquote:bg-decoration prose-blockquote:rounded-sm prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:font-medium prose-blockquote:text-base prose-blockquote:border-l-0 prose-blockquote:*:before:content-none prose-blockquote:*:after:content-none',
 		)}
-		style={{
-			'--default-mono-font-family': css.family,
-		}}
 		id="post"
 	>
 		{

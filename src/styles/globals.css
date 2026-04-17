@@ -42,10 +42,16 @@
 	--color-secondary: var(--secondary);
 	--color-tertiary: var(--tertiary);
 	--color-inactive: var(--inactive);
+	--color-link: var(--link);
+	--color-link-decoration: var(--link-decoration);
+	--color-surface: var(--surface);
+	--color-heading: var(--heading);
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
+	--font-fugaz-one: var(--font-fugaz-one);
+	--font-mono: var(--font-calling-code);
 }
 
 :root {
@@ -57,8 +63,30 @@
 	--tertiary: #d0b798;
 	--decoration: #fbeee5;
 	--brand-foreground: white;
+	--link: #655134;
+	--link-decoration: #d0b798;
+	--surface: #ffffff;
+	--heading: #f48037;
 	--radius: 0.625rem;
 	--btn-inner-shadow: inset 0px 1px 0px 0px #ffffff, inset 0px -2px 0px 1px #00000029, 0px 1px 2px -0.1px #00000026;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #1a1a1e;
+		--foreground: #e8e6e3;
+		--brand: #2d3a4d;
+		--secondary: #93b4e4;
+		--inactive: #5bbfaa;
+		--tertiary: #6b5c50;
+		--decoration: #2a2630;
+		--link: #60a5fa;
+		--link-decoration: #3b5998;
+		--brand-foreground: #f0ece8;
+		--surface: #242428;
+		--heading: #60a5fa;
+		--btn-inner-shadow: inset 0px 1px 0px 0px #ffffff10, inset 0px -2px 0px 1px #00000050, 0px 1px 2px -0.1px #00000040;
+	}
 }
 
 @keyframes swipe-down {
@@ -105,6 +133,31 @@
 		@apply bg-brand text-brand-foreground scroll-smooth antialiased;
 		::selection {
 			@apply bg-brand-foreground text-brand;
+		}
+	}
+	.shiki,
+	.shiki span {
+		color: var(--shiki-light) !important;
+		background-color: var(--shiki-light-bg) !important;
+	}
+	@media (prefers-color-scheme: dark) {
+		.prose {
+			--tw-prose-body: var(--foreground);
+			--tw-prose-headings: var(--foreground);
+			--tw-prose-bold: var(--foreground);
+			--tw-prose-quotes: var(--foreground);
+			--tw-prose-counters: var(--tertiary);
+			--tw-prose-bullets: var(--tertiary);
+			--tw-prose-hr: var(--tertiary);
+			--tw-prose-quote-borders: var(--tertiary);
+			--tw-prose-captions: var(--inactive);
+			--tw-prose-th-borders: var(--tertiary);
+			--tw-prose-td-borders: var(--tertiary);
+		}
+		.shiki,
+		.shiki span {
+			color: var(--shiki-dark) !important;
+			background-color: var(--shiki-dark-bg) !important;
 		}
 	}
 }

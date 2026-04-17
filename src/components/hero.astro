@@ -21,7 +21,7 @@ const { text } = Astro.props
 					<>
 						<span class="motion-char">I</span>
 						<span class="motion-char"> </span>
-						<span class="motion-char font-bold underline underline-offset-4 decoration-background/70 decoration-1">create</span>
+						<span class="motion-char font-bold underline underline-offset-4 decoration-brand-foreground/30 decoration-1">create</span>
 						<span class="motion-char"> </span>
 						<span class="motion-char">clean</span>
 						<span class="motion-char"> </span>
@@ -29,7 +29,7 @@ const { text } = Astro.props
 						<span class="motion-char"> </span>
 						<span class="motion-char">and</span>
 						<span class="motion-char"> </span>
-						<span class="motion-char font-bold underline underline-offset-4 decoration-background/70 decoration-1">build</span>
+						<span class="motion-char font-bold underline underline-offset-4 decoration-brand-foreground/30 decoration-1">build</span>
 						<span class="motion-char"> </span>
 						<span class="motion-char">it</span>
 						<span class="motion-char"> </span>
@@ -45,6 +45,15 @@ const { text } = Astro.props
 import { animate, delay, stagger } from 'motion'
 
 document.addEventListener('astro:page-load', () => {
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+	if (reducedMotion) {
+		document.querySelectorAll('.motion-char').forEach((el) => {
+			(el as HTMLElement).style.opacity = '1'
+		})
+		return
+	}
+
 	delay(() => {
 		animate(
 			'.motion-char',
@@ -54,6 +63,7 @@ document.addEventListener('astro:page-load', () => {
 			},
 			{
 				delay: stagger(0.05),
+				ease: [0.23, 1, 0.32, 1],
 			},
 		)
 	}, 0.5)
