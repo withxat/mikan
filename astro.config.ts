@@ -57,22 +57,7 @@ export default defineConfig({
 			remarkCjkFriendlyGfmStrikethrough,
 		],
 		shikiConfig: {
-			langAlias: {
-				eslint: 'typescript',
-				git: 'shell',
-				github: 'yaml',
-				ignore: 'plaintext',
-				license: 'plaintext',
-				nest: 'typescript',
-				pnpm: 'shell',
-				react: 'tsx',
-				robot: 'plaintext',
-				tailwind: 'css',
-			},
-			themes: {
-				dark: 'catppuccin-mocha',
-				light: 'catppuccin-latte',
-			},
+			theme: 'vesper',
 		},
 	},
 	prefetch: {
