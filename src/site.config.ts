@@ -35,7 +35,11 @@ export const siteConfig: SiteConfig = {
 	ogImage: '/og-image.png',
 	postsPerPage: 4,
 	projects: { enabled: true },
-	socials: [{ href: '/feed.xml', label: 'RSS' }],
+	socials: [
+		{ href: 'https://x.com/withxat', label: 'X' },
+		{ href: 'https://github.com/withxat', label: 'GitHub' },
+		{ href: '/feed.xml', label: 'RSS' },
+	],
 	tagline: 'A personal notebook',
 	title: 'mikan — A little space on the web',
 	url: process.env.SITE_URL || 'https://example.com',
