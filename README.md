@@ -183,6 +183,6 @@ public/                 Files copied directly to the build
 ## Author
 
 **mikan** © [Xat](https://github.com/withxat).<br>
-Authored and maintained by Xat with help from contributors ([list](https://github.com/withxat/portfolio/graphs/contributors)).
+Authored and maintained by Xat with help from contributors ([list](https://github.com/withxat/mikan/graphs/contributors)).
 
 > [Blog](https://blog.xat.sh) · GitHub [@withxat](https://github.com/withxat) · Telegram [@withxat](https://t.me/withxat) · X [@withxat](https://x.com/withxat) · Email [i@xat.sh](mailto:i@xat.sh)

@@ -183,6 +183,6 @@ public/                 直接复制到构建产物的静态文件
 ## 作者
 
 **mikan** © [Xat](https://github.com/withxat)。<br>
-由 Xat 与贡献者共同维护（[贡献者列表](https://github.com/withxat/portfolio/graphs/contributors)）。
+由 Xat 与贡献者共同维护（[贡献者列表](https://github.com/withxat/mikan/graphs/contributors)）。
 
 > [Blog](https://blog.xat.sh) · GitHub [@withxat](https://github.com/withxat) · Telegram [@withxat](https://t.me/withxat) · X [@withxat](https://x.com/withxat) · Email [i@xat.sh](mailto:i@xat.sh)
