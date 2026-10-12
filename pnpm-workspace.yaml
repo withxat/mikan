@@ -2,13 +2,14 @@ shellEmulator: true
 
 trustPolicy: no-downgrade
 
+# Astro Check's watcher works with Chokidar 5 on the Node versions we support.
+# Chokidar 4.0.3 is rejected by the existing provenance policy.
+overrides:
+  '@astrojs/check>chokidar': ^5.0.0
+
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
-  - cn-font-split
   - esbuild
-  - koffi
   - lefthook
-  - protobufjs
   - sharp
-  - swup
   - unrs-resolver

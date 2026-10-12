@@ -1,38 +1,29 @@
 ---
 import type { ImageMetadata } from 'astro'
 
-import { getImage, Image } from 'astro:assets'
+import { getImage } from 'astro:assets'
 
 interface Props {
-	alt: string
+	alt?: string
+	height?: number
 	src: ImageMetadata | string
 	title?: string
+	width?: number
 }
 
-const { alt, src, title }: Props = Astro.props
-
-const isExternal = typeof src === 'string' && src.startsWith('http')
-
-const img = await getImage({
-	densities: [0.7],
+const { alt = '', height, src, title, width } = Astro.props
+const image = await getImage({
 	format: 'webp',
-	inferSize: isExternal,
+	height,
+	inferSize: typeof src === 'string' && /^https?:\/\//.test(src),
 	src,
+	width,
 })
-
-const size = img.attributes
-
 ---
 
-<div class="flex flex-col gap-0.5">
-	<a
-		data-low-src={img.srcSet.values[0].url}
-		data-pswp-height={size.height}
-		data-pswp-width={size.width}
-		href={img.src}
-		target="_blank"
-	>
-		<Image alt={alt} class="w-full" height={isExternal ? size.height : img.srcSet.values[0].transform.height!} src={isExternal ? src : img.srcSet.values[0].url} width={isExternal ? size.width : img.srcSet.values[0].transform.width!} inferSize />
+<span class="flex flex-col gap-0.5">
+	<a data-pswp-height={image.attributes.height} data-pswp-width={image.attributes.width} href={image.src} rel="noopener noreferrer" target="_blank">
+		<img {...image.attributes} alt={alt} class="w-full" decoding="async" loading="lazy" src={image.src} />
 	</a>
-	<span class="text-inactive text-sm text-center leading-none mt-0">{title ?? alt}</span>
-</div>
+	{(title || alt) && <span class="mt-0 text-center text-sm leading-none text-inactive">{title ?? alt}</span>}
+</span>

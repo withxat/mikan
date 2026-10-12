@@ -1,42 +1,38 @@
 ---
 import { getCollection } from 'astro:content'
-import { format } from 'date-fns'
 
 import PostLayout from '@/layouts/post-layout.astro'
+import { postUrl, publishedPosts } from '@/lib/posts'
+import { siteConfig } from '@/site.config'
 
-const posts = await getCollection('blog')
-
-const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-
+const posts = publishedPosts(await getCollection('blog'))
 const categories = await getCollection('categories')
-
-const variousPosts = categories.flatMap((category) => {
-	const posts = sortedPosts.filter(post => post.data.category === category.data.slug)
-	if (posts.length > 0) {
-		return {
-			category,
-			posts,
-		}
-	}
-	return []
-})
+const groups = categories.map(category => ({
+	category,
+	posts: posts.filter(post => post.data.category.id === category.id),
+})).filter(group => group.posts.length > 0)
 ---
 
-<PostLayout description="All writings written by Xat" tag="Archive - Texts just sparkle in my mind" title="All Writings">
-	{variousPosts.map(category => (
-		<div class="flex items-center justify-between my-3">
-			<h3 class="font-bold text-heading leading-none tracking-wide ml-4 text-shadow-2xs">{category.category.data.name}</h3>
-		</div>
-		<ul class="py-2 flex flex-col gap-1">
-			{category.posts.map(post => (
-				<li class="mx-2 px-2 py-2 rounded-sm hover:bg-decoration pressable">
-					<a href={`/post/${post.id}`}>
-						<p class="text-xs text-secondary">{format(post.data.date, 'yyyy-MM-dd')}</p>
-						<h4>{post.data.title}</h4>
-						<p class="text-inactive text-sm">{post.data.summary}</p>
-					</a>
-				</li>
-			))}
-		</ul>
+<PostLayout description={`All writings by ${siteConfig.author}.`} tag="The archive" title="All writings">
+	{groups.map(({ category, posts }) => (
+		<section>
+			<h2 class="mx-4 my-3 leading-none font-bold tracking-wide text-heading text-shadow-2xs">{category.data.name}</h2>
+			<ul class="flex flex-col gap-1 py-2">
+				{posts.map(post => (
+					<li class="
+						pressable mx-2 rounded-sm
+						hover:bg-decoration
+					"
+					>
+						<a class="block p-2" href={postUrl(post.id)}>
+							<time class="text-xs text-secondary" datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10)}</time>
+							<h3>{post.data.title}</h3>
+							<p class="text-sm text-inactive">{post.data.summary}</p>
+						</a>
+					</li>
+				))}
+			</ul>
+		</section>
 	))}
+	{posts.length === 0 && <p class="p-4 text-secondary">Nothing published yet. Check back soon.</p>}
 </PostLayout>

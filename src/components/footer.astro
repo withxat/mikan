@@ -1,33 +1,25 @@
+---
+import { siteConfig } from '@/site.config'
+---
+
 <footer
-	class="print:opacity-100 flex flex-col text-sm pt-4 pb-4 sm:w-2xl sm:mx-auto z-10"
+	class="
+		z-10 flex w-full max-w-2xl flex-col py-4 text-sm
+		sm:mx-auto
+		print:opacity-100
+	"
 	transition:name="footer"
 >
-	<div class="px-4 py-2 flex flex-col gap-1">
-		<p>
-			&copy; Xat 2025
-		</p>
-		<p>Coding with Love, Exploring the World.</p>
+	<div class="flex flex-col gap-1 px-4 py-2">
+		<p>&copy; {new Date().getFullYear()} {siteConfig.author}</p>
+		<p>{siteConfig.description}</p>
 	</div>
-	<p class="px-4 py-2 border-t border-brand-foreground/50 border-dashed">
-		<a href="https://github.com/withxat" target="_blank"> Github </a>
-		{' '}
-		・
-		{' '}
-		<a href="https://x.com/withxat" target="_blank"> Twitter/X </a>
-		{' '}
-		・
-		{' '}
-		<a href="https://t.me/withxat" target="_blank"> Telegram </a>
-		{' '}
-		・
-		{' '}
-		<a href="mailto:i@xat.sh"> Email </a>
-	</p>
-	<p class="px-4 py-2 border-t border-brand-foreground/50 border-dashed">
-		CC BY-SA 4.0
-		{' '}
-		・
-		{' '}
-		not by AI
-	</p>
+	{siteConfig.socials.length > 0 && (
+		<nav aria-label="Social links" class="flex flex-wrap gap-x-4 gap-y-2 border-t border-dashed border-brand-foreground/50 px-4 py-2">
+			{siteConfig.socials.map(social => (
+				<a href={social.href} rel={social.href.startsWith('https://') ? 'noopener noreferrer' : undefined} target={social.href.startsWith('https://') ? '_blank' : undefined}>{social.label}</a>
+			))}
+		</nav>
+	)}
+	<p class="border-t border-dashed border-brand-foreground/50 px-4 py-2">{siteConfig.footer}</p>
 </footer>

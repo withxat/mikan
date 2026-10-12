@@ -3,10 +3,11 @@ import Intro from '@/components/home/intro.astro'
 import Masterpiece from '@/components/home/masterpiece.astro'
 import Posts from '@/components/home/posts.astro'
 import HomeLayout from '@/layouts/home-layout.astro'
+import { siteConfig } from '@/site.config'
 ---
 
 <HomeLayout>
 	<Intro />
 	<Posts />
-	<Masterpiece />
+	{siteConfig.projects.enabled && <Masterpiece />}
 </HomeLayout>

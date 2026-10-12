@@ -8,5 +8,5 @@ type Props = JSX.IntrinsicElements['a']
 const { class: className, ...props } = Astro.props
 ---
 
-<a {...props} class={cn('text-link break-all', className)}><slot /></a>
-<span class="i-mingcute-arrow-right-up-line text-tertiary translate-y-[3px] -translate-x-[2px]" />
+<a {...props} class={cn('break-all text-link', className)}><slot /></a>
+<span class="i-mingcute-arrow-right-up-line translate-x-[-2px] translate-y-[3px] text-tertiary" />

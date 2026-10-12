@@ -1,32 +1,14 @@
 [
 	{
-		"title": "Monorepo Template",
-		"id": "monorepo-template",
-		"description": "🍤 Just a template",
-		"link": "https://github.com/withxat/monorepo-template"
+		"id": "astro",
+		"title": "Built with Astro",
+		"description": "The web framework behind this little notebook.",
+		"link": "https://astro.build"
 	},
 	{
-		"title": "TSConfig",
-		"id": "tsconfig",
-		"description": "📒 A strict TypeScript configuration for modern project",
-		"link": "https://github.com/withxat/tsconfig"
-	},
-	{
-		"title": "ESLint-Config",
-		"id": "eslint-config",
-		"description": "🧃 Xat's ESLint config preset",
-		"link": "https://github.com/withxat/eslint-config"
-	},
-	{
-		"title": "Matebook-14-2019-Hackintosh",
-		"id": "matebook-14-2019-hackintosh",
-		"description": "🚀 Transform your MateBook 14 2019 into a Hackintosh",
-		"link": "https://github.com/withxat/Matebook-14-2019-Hackintosh"
-	},
-	{
-		"title": "OpenCat.app",
-		"id": "opencat-app",
-		"description": "👨‍🎨 Redesign OpenCat website",
-		"link": "https://github.com/waylybaye/opencat.app"
+		"id": "your-next-project",
+		"title": "Your next project",
+		"description": "A place for something you are proud of. Replace this example with your own.",
+		"link": "https://example.com"
 	}
 ]

@@ -8,14 +8,15 @@ import RootLayout from '@/layouts/root-layout.astro'
 
 interface Props {
 	description: string
+	publishedAt?: Date
 	tag: string
 	title: string
 }
 
-const { description, tag, title }: Props = Astro.props
+const { description, publishedAt, tag, title }: Props = Astro.props
 ---
 
-<RootLayout description={description} title={title}>
+<RootLayout description={description} publishedAt={publishedAt} title={title}>
 	<GoHome />
 	<Header tag={tag} />
 	<Hero text={title} />

@@ -3,9 +3,8 @@ pre-commit:
   jobs:
     - name: eslint
       run: pnpm eslint {staged_files} --fix
-      glob: '*.{js,ts,json,yml}'
+      glob: '*.{astro,js,mjs,ts,json,yml,css}'
       stage_fixed: true
-
     - name: typecheck
-      run: pnpm tsc --noEmit
-      glob: '**/*.ts'
+      run: pnpm typecheck
+      glob: '**/*.{astro,ts}'

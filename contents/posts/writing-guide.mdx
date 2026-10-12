@@ -1,0 +1,58 @@
+---
+title: Writing your first post
+date: 2026-01-02
+summary: Frontmatter, code, images, and a few details to help you get started.
+category: guides
+tags: [guide, markdown]
+---
+
+## Start with a file
+
+Create a `.md` or `.mdx` file directly inside `contents/posts/`. Its filename becomes its URL: `hello.mdx` lives at `/post/hello`.
+
+```yaml
+title: Hello, world
+date: 2026-01-01
+summary: My first note on this new blog.
+category: notes
+tags: [hello]
+draft: false
+```
+
+A category must match an `id` in `contents/categories.json`. Drafts and posts dated in the future are excluded from the website, RSS feed, and sitemap. Rebuild the site when you are ready to publish.
+
+## Show your work
+
+Code blocks include syntax highlighting:
+
+```ts
+const littleThings = ['a good book', 'a long walk', 'a new idea']
+
+for (const thing of littleThings) {
+  console.log(`Make room for ${thing}.`)
+}
+```
+
+## Add an image
+
+Keep images in `contents/posts/image/` and reference them with a relative path. In MDX posts, clicking an image opens a larger view.
+
+![A small orange sun above a quiet green landscape](./image/landscape.png "A little room to breathe.")
+
+## Keep a checklist
+
+- [x] Choose a title
+- [x] Write something useful
+- [ ] Make a cup of tea
+
+| Feature | Where it lives |
+| --- | --- |
+| Site identity | `src/site.config.ts` |
+| Posts | `contents/posts/` |
+| Colors | `src/styles/globals.css` |
+
+## 中文也很自在
+
+写下一个想法，不必等到它足够完整。这里支持**中文加粗**、~~删除线~~和中英文混排。
+
+For ordinary prose, `.md` works too. Use `.mdx` when you want the custom image viewer or imported Astro components.

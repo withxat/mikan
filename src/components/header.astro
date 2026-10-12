@@ -1,5 +1,6 @@
 ---
 import Tag from '@/components/tag.astro'
+import { siteConfig } from '@/site.config'
 
 interface Props {
 	tag?: string
@@ -9,11 +10,14 @@ const { tag } = Astro.props
 ---
 
 <header
-	class="flex flex-col gap-1 p-4 text-3xl leading-none font-bold sm:w-2xl sm:mx-auto mt-0.5"
+	class="
+		mt-0.5 flex w-full max-w-2xl flex-col gap-1 p-4 text-3xl leading-none font-bold
+		sm:mx-auto
+	"
 	id="header"
 >
 	<div class="flex items-center justify-between">
-		<h1 class="leading-none inline-flex items-center gap-1 font-fugaz-one" transition:persist><span class="i-mingcute-sparkles-2-fill text-brand-foreground -translate-y-[2px]" />Xat</h1>
+		<a aria-label={`${siteConfig.name} home`} class="inline-flex items-center gap-1 font-fugaz-one leading-none" href="/" transition:persist><span class="i-mingcute-sparkles-2-fill translate-y-[-2px] text-brand-foreground" />{siteConfig.name}</a>
 	</div>
 	<Tag tag={tag} />
 </header>

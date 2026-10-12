@@ -1,14 +1,15 @@
 import { file, glob } from 'astro/loaders'
 import { z } from 'astro/zod'
-import { defineCollection } from 'astro:content'
+import { defineCollection, reference } from 'astro:content'
 
 const blog = defineCollection({
-	loader: glob({ base: './contents/posts', pattern: '**/*.mdx' }),
+	loader: glob({ base: './contents/posts', pattern: '*.{md,mdx}' }),
 	schema: z.object({
-		category: z.string(),
-		date: z.date(),
+		category: reference('categories'),
+		date: z.coerce.date(),
+		draft: z.boolean().default(false),
 		summary: z.string(),
-		tags: z.array(z.string()),
+		tags: z.array(z.string()).default([]),
 		title: z.string(),
 	}),
 })
@@ -26,7 +27,7 @@ const projects = defineCollection({
 	loader: file('contents/projects.json'),
 	schema: z.object({
 		description: z.string(),
-		link: z.string(),
+		link: z.url(),
 		title: z.string(),
 	}),
 })

@@ -1,30 +1,30 @@
 ---
 import { getCollection } from 'astro:content'
 
+import { siteConfig } from '@/site.config'
+
 const projects = await getCollection('projects')
 ---
 
-<div class="py-2">
-	<div class="flex items-center justify-between my-3">
-		<h3 class="font-bold text-heading leading-none tracking-wide ml-4 text-shadow-2xs">Project</h3>
-		<a href="https://github.com/withxat" target="_blank">
-			<button class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-2 py-1 rounded-sm bg-brand text-brand-foreground">
-				<span>View All</span>
-				<span class="i-mingcute-arrow-right-line  w-4 ml-0.5 sm:ml-0 sm:w-0 sm:group-hover/button:w-4 sm:group-hover/button:ml-0.5 transition-[width,margin] duration-200 ease-out" />
-			</button>
-		</a>
-	</div>
-	<ul class="flex flex-col gap-1">
-		{projects.map(project => (
-			<li class="group/item mx-2 px-2 py-2 rounded-sm hover:bg-decoration pressable">
-				<a href={project.data.link} target="_blank">
-					<div class="flex items-center">
-						<h4>{project.data.title}</h4>
-						<span class="i-mingcute-arrow-right-up-line text-tertiary w-4 ml-1 sm:ml-0 sm:w-0 sm:group-hover/item:w-4 sm:group-hover/item:ml-1 transition-[width,margin] duration-200 ease-out translate-y-[1px] -translate-x-[2px]" />
-					</div>
-					<p class="text-inactive text-sm">{project.data.description}</p>
-				</a>
-			</li>
-		))}
-	</ul>
-</div>
+{projects.length > 0 && (
+	<section aria-labelledby="projects-heading" class="py-2">
+		<div class="my-3 flex items-center justify-between">
+			<h2 class="ml-4 leading-none font-bold tracking-wide text-heading text-shadow-2xs" id="projects-heading">Projects</h2>
+			{siteConfig.projects.moreUrl && <a class="pressable mr-2 rounded-sm bg-brand px-2 py-1 text-xs text-brand-foreground btn-inner-shadow" href={siteConfig.projects.moreUrl} rel="noopener noreferrer" target="_blank">View all <span aria-hidden="true">↗</span></a>}
+		</div>
+		<ul class="flex flex-col gap-1">
+			{projects.map(project => (
+				<li class="
+					pressable mx-2 rounded-sm
+					hover:bg-decoration
+				"
+				>
+					<a class="block p-2" href={project.data.link} rel="noopener noreferrer" target="_blank">
+						<h3>{project.data.title} <span aria-hidden="true">↗</span></h3>
+						<p class="text-sm text-inactive">{project.data.description}</p>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
+)}

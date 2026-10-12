@@ -1,53 +1,67 @@
 ---
-import { Font, getImage } from 'astro:assets'
+import { getImage } from 'astro:assets'
 import { ClientRouter } from 'astro:transitions'
 
 import Noise from '@/assets/noise.png'
+import { siteConfig } from '@/site.config'
 
+import '@fontsource/fugaz-one/latin-400.css'
 import '@/styles/globals.css'
 
 interface Props {
 	description?: string
-	tag?: string
+	publishedAt?: Date
 	title?: string
 }
 
-const noise = await getImage({
-	format: 'webp',
-	src: Noise,
-})
-
-const { description, title } = Astro.props
+const noise = await getImage({ format: 'webp', src: Noise })
+const { description = siteConfig.description, publishedAt, title } = Astro.props
+const pageTitle = title ? `${title} — ${siteConfig.name}` : siteConfig.title
+const canonical = new URL(Astro.url.pathname, siteConfig.url)
+const ogImage = new URL(siteConfig.ogImage, siteConfig.url)
 ---
 
-<html lang="en">
+<html lang={siteConfig.lang}>
 	<head>
-		<Font cssVariable="--font-calling-code" />
-		<Font cssVariable="--font-fugaz-one" />
-		<ClientRouter />
 		<meta charset="UTF-8" />
-		<link href="/sitemap-index.xml" rel="sitemap" />
-		<script data-website-id="0b3c909d-3680-47f1-88f1-ae337236d0cd" src="https://cloud.umami.is/script.js" type="text/partytown" is:inline></script>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-		<link
-			href={new URL('feed.xml', Astro.site)}
-			rel="alternate"
-			title="Hi, Xat!"
-			type="application/rss+xml"
-		/>
-		<title>
-			{title ? `${title} - Xat` : 'Hi, Xat!'}
-		</title>
+		<ClientRouter />
+		<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+		<link href="/sitemap-index.xml" rel="sitemap" />
+		<link href={canonical} rel="canonical" />
+		<link href={new URL('/feed.xml', siteConfig.url)} rel="alternate" title={siteConfig.title} type="application/rss+xml" />
+		<title>{pageTitle}</title>
+		<meta content={description} name="description" />
+		<meta content={siteConfig.author} name="author" />
+		<meta content={publishedAt ? 'article' : 'website'} property="og:type" />
+		<meta content={siteConfig.name} property="og:site_name" />
+		<meta content={canonical} property="og:url" />
+		<meta content={pageTitle} property="og:title" />
+		<meta content={description} property="og:description" />
+		<meta content={ogImage} property="og:image" />
+		<meta content={siteConfig.name} property="og:image:alt" />
 		<meta content="summary_large_image" name="twitter:card" />
-		<meta content="Hi, Xat!" name="twitter:title" />
-		<meta content="https://xat.sh/og-image.png" property="og:image" />
-		<meta content="Hi, Xat!" property="og:title" />
-		<meta content={description ?? 'Code with Love, Exploring the World!'} property="og:description" />
-		<meta content={description ?? 'Code with Love, Exploring the World!'} name="description" />
+		<meta content={pageTitle} name="twitter:title" />
+		<meta content={description} name="twitter:description" />
+		<meta content={ogImage} name="twitter:image" />
+		{publishedAt && <meta content={publishedAt.toISOString()} property="article:published_time" />}
 	</head>
-	<body class="antialiased relative min-h-screen font-mono">
-		<div class="bg-brand absolute inset-0 -z-20" />
-		<div class="absolute inset-0 -z-10 dark:invert" style={{ backgroundImage: `url(${noise.src})` }} />
+	<body class="relative min-h-screen font-mono antialiased">
+		<a
+			class="
+				sr-only
+				focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-surface focus:p-3 focus:text-foreground
+			"
+			href="#main-content"
+		>Skip to content</a>
+		<div class="absolute inset-0 -z-20 bg-brand"></div>
+		<div
+			class="
+				absolute inset-0 -z-10
+				dark:invert
+			"
+			style={{ backgroundImage: `url(${noise.src})` }}
+		></div>
 		<slot />
 	</body>
 </html>
@@ -55,28 +69,18 @@ const { description, title } = Astro.props
 <script>
 import { animate, press } from 'motion'
 
-const easeOut = [0.23, 1, 0.32, 1] as const
-const pressDown = { scale: 0.95 }
-const pressUp = { scale: 1 }
-const pressOpts = { duration: 0.15, easing: easeOut }
+let cleanup: (() => void) | undefined
 
 document.addEventListener('astro:page-load', () => {
-	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-	if (reducedMotion)
+	cleanup?.()
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
 		return
-
-	press('.pressable', (element) => {
-		animate(element, pressDown, pressOpts)
+	cleanup = press('.pressable, button', (element) => {
+		animate(element, { scale: 0.97 }, { duration: 0.15 })
 		return () => {
-			animate(element, pressUp, pressOpts)
-		}
-	})
-
-	press('button', (element) => {
-		animate(element, pressDown, pressOpts)
-		return () => {
-			animate(element, pressUp, pressOpts)
+			animate(element, { scale: 1 }, { duration: 0.15 })
 		}
 	})
 })
+document.addEventListener('astro:before-swap', () => cleanup?.())
 </script>

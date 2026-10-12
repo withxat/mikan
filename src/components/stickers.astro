@@ -19,11 +19,14 @@ const stickers = [
 ]
 ---
 
-<div class="flex pt-2 gap-0.5" id="stickers">
+<div class="flex gap-0.5 pt-2" id="stickers">
 	{stickers.map((sticker, index) => (
 		<Image
 			class={cn(
-				'size-8 motion-sticker opacity-0 print:opacity-100',
+				`
+					motion-sticker size-8 opacity-0
+					print:opacity-100
+				`,
 				index % 2 === 0 ? 'rotate-12' : '-rotate-12',
 			)}
 			alt="Sticker"

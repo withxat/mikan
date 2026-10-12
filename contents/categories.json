@@ -1,17 +1,4 @@
 [
-	{
-		"name": "Life",
-		"slug": "life",
-		"description": "Bubbles of simple life"
-	},
-	{
-		"name": "Tech",
-		"slug": "tech",
-		"description": "Thoughts on technology"
-	},
-	{
-		"name": "Design",
-		"slug": "design",
-		"description": "Satisfying my aesthetic"
-	}
+	{ "id": "notes", "name": "Notes", "slug": "notes", "description": "Things worth remembering" },
+	{ "id": "guides", "name": "Guides", "slug": "guides", "description": "Make yourself at home" }
 ]

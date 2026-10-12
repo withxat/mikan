@@ -1,6 +1,4 @@
 ---
-import { format } from 'date-fns'
-
 interface Props {
 	publishedAt: Date
 	tags: string[]
@@ -9,25 +7,29 @@ interface Props {
 const { publishedAt, tags }: Props = Astro.props
 ---
 
-<div class="py-4 mx-4 flex flex-col gap-2 rounded-md bg-decoration border border-tertiary text-tertiary my-2">
-	<span class="px-4 text-base leading-none font-bold uppercase font-sans border-b mb-4 tracking-wide">PROPERTIES</span>
-	<div class="flex items-center px-4 w-full">
-		<span class="basis-5/12 flex items-center gap-2 py-1">
+<div class="
+	mx-4 my-2 flex flex-col gap-2 rounded-md border border-tertiary bg-decoration py-4
+	text-tertiary
+"
+>
+	<span class="mb-4 border-b px-4 font-sans text-base leading-none font-bold tracking-wide uppercase">PROPERTIES</span>
+	<div class="flex w-full items-center px-4">
+		<span class="flex basis-5/12 items-center gap-2 py-1">
 			<span class="i-mingcute-calendar-fill" />
-			<span class="text-secondary text-xs">Date</span>
+			<span class="text-xs text-secondary">Date</span>
 		</span>
 		<div class="basis-7/12">
-			<span class="text-xs text-secondary bg-surface rounded-md px-2 py-1 border border-tertiary">{format(publishedAt, 'yyyy-MM-dd')}</span>
+			<time class="rounded-md border border-tertiary bg-surface px-2 py-1 text-xs text-secondary" datetime={publishedAt.toISOString()}>{publishedAt.toISOString().slice(0, 10)}</time>
 		</div>
 	</div>
-	<div class="flex items-start px-4 w-full">
-		<span class="basis-5/12 flex items-center gap-2 py-1">
+	<div class="flex w-full items-start px-4">
+		<span class="flex basis-5/12 items-center gap-2 py-1">
 			<span class="i-mingcute-tag-fill" />
-			<span class="text-secondary text-xs">Tags</span>
+			<span class="text-xs text-secondary">Tags</span>
 		</span>
-		<div class="basis-7/12 flex items-center gap-2 flex-wrap">
+		<div class="flex basis-7/12 flex-wrap items-center gap-2">
 			{tags.map(tag => (
-				<span class="text-xs text-secondary rounded-md px-2 py-1 bg-surface border border-tertiary">{tag}</span>
+				<span class="rounded-md border border-tertiary bg-surface px-2 py-1 text-xs text-secondary">{tag}</span>
 			))}
 		</div>
 	</div>

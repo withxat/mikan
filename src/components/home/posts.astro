@@ -1,36 +1,35 @@
 ---
 import { getCollection } from 'astro:content'
 
-const posts = await getCollection('blog')
+import { postUrl, publishedPosts } from '@/lib/posts'
+import { siteConfig } from '@/site.config'
 
-const latestPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).slice(0, 4)
+const latestPosts = publishedPosts(await getCollection('blog')).slice(0, siteConfig.postsPerPage)
 ---
 
-<div class="py-2">
-	<div class="flex items-center justify-between my-3">
+<section aria-labelledby="writing-heading" class="py-2">
+	<div class="my-3 flex items-center justify-between">
 		<div class="inline-flex items-center gap-2">
-			<h3 class="font-bold text-heading leading-none tracking-wide ml-4 text-shadow-2xs">Writing</h3>
-			<a aria-label="RSS Feed" class="p-1" href="/feed.xml" target="_blank">
-				<button aria-label="RSS Feed" class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-1 py-1 rounded-sm bg-brand text-brand-foreground">
-					<span class="i-mingcute-rss-2-line text-sm leading-none" />
-				</button>
+			<h2 class="ml-4 leading-none font-bold tracking-wide text-heading text-shadow-2xs" id="writing-heading">Writing</h2>
+			<a aria-label="RSS feed" class="inline-flex rounded-sm bg-brand p-1 text-brand-foreground btn-inner-shadow" href="/feed.xml">
+				<span class="i-mingcute-rss-2-line text-sm leading-none" />
 			</a>
 		</div>
-		<a href="/post">
-			<button class="btn-inner-shadow cursor-pointer group/button flex items-center text-xs mr-2 px-2 py-1 rounded-sm bg-brand text-brand-foreground">
-				<span>View All</span>
-				<span class="i-mingcute-arrow-right-line  w-4 ml-0.5 sm:ml-0 sm:w-0 sm:group-hover/button:w-4 sm:group-hover/button:ml-0.5 transition-[width,margin] duration-200 ease-out" />
-			</button>
-		</a>
+		<a class="pressable mr-2 rounded-sm bg-brand px-2 py-1 text-xs text-brand-foreground btn-inner-shadow" href="/post">View all <span aria-hidden="true">→</span></a>
 	</div>
 	<ul class="flex flex-col gap-1">
 		{latestPosts.map(post => (
-			<li class="mx-2 px-2 py-2 rounded-sm hover:bg-decoration pressable">
-				<a href={`/post/${post.id}`}>
-					<h4>{post.data.title}</h4>
-					<p class="text-inactive text-sm">{post.data.summary}</p>
+			<li class="
+				pressable mx-2 rounded-sm
+				hover:bg-decoration
+			"
+			>
+				<a class="block p-2" href={postUrl(post.id)}>
+					<h3>{post.data.title}</h3>
+					<p class="text-sm text-inactive">{post.data.summary}</p>
 				</a>
 			</li>
 		))}
 	</ul>
-</div>
+	{latestPosts.length === 0 && <p class="px-4 py-2 text-secondary">Nothing published yet. Check back soon.</p>}
+</section>

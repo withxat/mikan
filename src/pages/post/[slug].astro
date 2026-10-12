@@ -7,10 +7,11 @@ import Linkx from '@/components/post/linkx.astro'
 import Metadata from '@/components/post/metadata.astro'
 import Quotex from '@/components/post/quotex.astro'
 import PostLayout from '@/layouts/post-layout.astro'
+import { publishedPosts } from '@/lib/posts'
 import { cn } from '@/lib/utils'
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog')
+	const posts = publishedPosts(await getCollection('blog'))
 	return posts.map(post => ({
 		params: { slug: post.id },
 	}))
@@ -24,11 +25,10 @@ if (!post) {
 	return
 }
 
-const category = await getEntry('categories', post.data.category)
+const category = await getEntry(post.data.category)
 
 if (!category) {
-	Astro.redirect('/post')
-	return
+	throw new Error(`Unknown category for post "${post.id}". Add it to contents/categories.json.`)
 }
 
 const { Content } = await render(post);
@@ -36,22 +36,35 @@ const { Content } = await render(post);
 
 <PostLayout
 	description={post.data.summary}
+	publishedAt={post.data.date}
 	tag={`${category.data.name} - ${category.data.description}`}
 	title={post.data.title}
 >
 	<Metadata publishedAt={post.data.date} tags={post.data.tags} />
 	<div
 		class={cn(
-			'prose py-2 mx-4 font-sans *:hyphens-auto max-w-full dark:prose-invert',
-			'prose-img:opacity-0 print:prose-img:opacity-100 prose-img:mt-0 prose-img:mb-2 prose-img:rounded-sm prose-img:border',
-			'prose-code:before:hidden prose-code:after:hidden prose-code:break-all prose-code:font-mono',
-			'prose-code:not-[:where(pre_code)]:text-[15px] prose-code:not-[:where(pre_code)]:bg-decoration prose-code:not-[:where(pre_code)]:rounded-sm prose-code:not-[:where(pre_code)]:px-1.5 prose-code:not-[:where(pre_code)]:text-secondary prose-code:not-[:where(pre_code)]:pb-0.5 prose-code:not-[:where(pre_code)]:pt-[3px] prose-code:not-[:where(pre_code)]:font-normal prose-code:not-[:where(pre_code)]:mx-0.5',
-			'prose-a:text-link prose-a:underline prose-a:underline-offset-4 prose-a:decoration-link-decoration prose-a:decoration-1',
+			`
+				mx-4 prose max-w-full py-2 font-sans
+				*:hyphens-auto
+				dark:prose-invert
+			`,
+			'prose-img:mt-0 prose-img:mb-2 prose-img:rounded-sm prose-img:border',
+			`
+				prose-code:font-mono prose-code:break-all
+				prose-code:before:hidden
+				prose-code:after:hidden
+			`,
+			'prose-code:not-[:where(pre_code)]:mx-0.5 prose-code:not-[:where(pre_code)]:rounded-sm prose-code:not-[:where(pre_code)]:bg-decoration prose-code:not-[:where(pre_code)]:px-1.5 prose-code:not-[:where(pre_code)]:pt-0.75 prose-code:not-[:where(pre_code)]:pb-0.5 prose-code:not-[:where(pre_code)]:text-[15px] prose-code:not-[:where(pre_code)]:font-normal prose-code:not-[:where(pre_code)]:text-secondary',
+			'prose-a:text-link prose-a:underline prose-a:decoration-link-decoration prose-a:decoration-1 prose-a:underline-offset-4',
 			'prose-p:hyphens-auto',
-			'prose-headings:not-first:mt-[1.5em] prose-headings:not-first:scroll-mt-[1em] prose-headings:not-first:mb-[1em]',
-			'prose-h2:text-secondary prose-h2:font-bold prose-h2:text-[1.725rem]',
-			'prose-h3:font-bold prose-h3:text-[1.125rem]',
-			'prose-blockquote:bg-decoration prose-blockquote:rounded-sm prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:font-medium prose-blockquote:text-base prose-blockquote:border-l-0 prose-blockquote:*:before:content-none prose-blockquote:*:after:content-none',
+			'prose-headings:not-first:mt-[1.5em] prose-headings:not-first:mb-[1em] prose-headings:not-first:scroll-mt-[1em]',
+			'prose-h2:text-[1.725rem] prose-h2:font-bold prose-h2:text-secondary',
+			'prose-h3:text-[1.125rem] prose-h3:font-bold',
+			`
+				prose-blockquote:rounded-sm prose-blockquote:border-l-0 prose-blockquote:bg-decoration prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:text-base prose-blockquote:font-medium
+				prose-blockquote:*:before:content-none
+				prose-blockquote:*:after:content-none
+			`,
 		)}
 		id="post"
 	>
@@ -74,6 +87,8 @@ const { Content } = await render(post);
 import { animate, inView } from 'motion'
 
 document.addEventListener('astro:page-load', () => {
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+		return
 	inView('#post img', (element) => {
 		animate(
 			element,
@@ -97,7 +112,7 @@ import 'photoswipe/style.css'
 
 const lightbox = new PhotoSwipeLightbox({
 	bgOpacity: 0.8,
-	close: false,
+	close: true,
 	gallery: '#post a:has(img)',
 	imageClickAction: 'close',
 	mainClass: 'lightbox',

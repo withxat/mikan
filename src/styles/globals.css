@@ -22,7 +22,7 @@
 @custom-variant mobile-hover (&:hover);
 
 @utility motion-char {
-	@apply opacity-0 print:opacity-100;
+	@apply print:opacity-100;
 }
 
 @utility btn-inner-shadow {
@@ -50,8 +50,8 @@
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
-	--font-fugaz-one: var(--font-fugaz-one);
-	--font-mono: var(--font-calling-code);
+	--font-fugaz-one: 'Fugaz One', sans-serif;
+	--font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
 :root {
