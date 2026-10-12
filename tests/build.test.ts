@@ -34,7 +34,8 @@ test('all generated articles agree across archive, RSS, canonical URL, and sitem
 
 test('starter does not ship the previous site identity or analytics', () => {
 	for (const page of [home, feed, archive, sitemap, read('robots.txt')]) {
-		assert.doesNotMatch(page, /xat\.sh|cloud\.umami\.is|0b3c909d-3680-47f1-88f1-ae337236d0cd/)
+		const content = page.replaceAll(new URL(siteConfig.url).origin, '')
+		assert.doesNotMatch(content, /xat\.sh|cloud\.umami\.is|0b3c909d-3680-47f1-88f1-ae337236d0cd/)
 	}
 	assert.ok(!existsSync(new URL('xat.mp3', output)))
 })

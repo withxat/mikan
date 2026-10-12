@@ -27,7 +27,7 @@ jobs:
       - run: pnpm lint && pnpm typecheck && pnpm test
       - run: pnpm build && pnpm test:build
         env:
-          SITE_URL: ${{ steps.pages.outputs.origin }}
+          SITE_URL: https://${{ steps.pages.outputs.host }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - name: Publish static files to mikan branch
         env:

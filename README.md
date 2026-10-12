@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[Live demo](https://withxat.github.io/mikan/)
+[Live demo](https://mikan.xat.sh/)
 
 A warm, minimal blog template built with Astro, Tailwind CSS, and MDX. A little space for your writing, projects, and everyday discoveries.
 
@@ -160,7 +160,7 @@ No server adapter is needed. Set your production URL in `src/site.config.ts` bef
 
 For a hosted demo, you can set the `SITE_URL` build environment variable instead. It overrides the URL in `src/site.config.ts` so canonical URLs, RSS, and the sitemap point to the deployed site.
 
-The [live demo](https://withxat.github.io/mikan/) uses GitHub Pages. Source code stays on `main`; the **Deploy demo** workflow builds and checks the site, commits only the generated static files to the `mikan` branch, and publishes the same files to Pages. It reads the deployment origin and base path from GitHub, so a new repository name or custom domain does not need a workflow edit.
+The [live demo](https://mikan.xat.sh/) uses GitHub Pages. Source code stays on `main`; the **Deploy demo** workflow builds and checks the site, commits only the generated static files to the `mikan` branch, and publishes the same files to Pages. It reads the deployment origin and base path from GitHub, so a new repository name or custom domain does not need a workflow edit.
 
 Root-relative links in Markdown and MDX, such as `[Welcome](/post/welcome)`, follow the configured base path. Use `withBase()` from `src/lib/urls.ts` for internal links in custom Astro components.
 

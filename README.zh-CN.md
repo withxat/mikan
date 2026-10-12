@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[在线演示](https://withxat.github.io/mikan/)
+[在线演示](https://mikan.xat.sh/)
 
 一个温暖、简洁的博客模板，基于 Astro、Tailwind CSS 和 MDX。留一小块地方，放下你的文字、作品和日常发现。
 
@@ -160,7 +160,7 @@ GitHub Actions 会在推送和拉取请求时执行 lint、类型检查、测试
 
 部署在线演示时，也可以设置构建环境变量 `SITE_URL`。它会覆盖 `src/site.config.ts` 中的地址，让规范链接、RSS 和站点地图指向实际部署的站点。
 
-[在线演示](https://withxat.github.io/mikan/) 使用 GitHub Pages。源码保留在 `main`；**Deploy demo** 工作流完成构建和检查后，将生成的静态文件提交到 `mikan` 分支，并将同一份文件发布到 Pages。域名和部署路径直接从 GitHub 读取，修改仓库名或绑定自定义域名后无需改动工作流。
+[在线演示](https://mikan.xat.sh/) 使用 GitHub Pages。源码保留在 `main`；**Deploy demo** 工作流完成构建和检查后，将生成的静态文件提交到 `mikan` 分支，并将同一份文件发布到 Pages。域名和部署路径直接从 GitHub 读取，修改仓库名或绑定自定义域名后无需改动工作流。
 
 Markdown 和 MDX 中以 `/` 开头的站内链接，例如 `[欢迎](/post/welcome)`，会自动适配部署路径。在自定义 Astro 组件中添加站内链接时，请使用 `src/lib/urls.ts` 中的 `withBase()`。
 
