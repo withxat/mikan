@@ -1,6 +1,6 @@
 # Project guidance
 
-Mikan is a static blog starter built with Astro 7, Tailwind CSS 4, and MDX.
+mikan is a static blog starter built with Astro 7, Tailwind CSS 4, and MDX.
 
 - Read `README.md` for setup, writing, configuration, and deployment.
 - Keep site identity in `src/site.config.ts`; avoid hardcoded author or domain details in components.
