@@ -1,27 +1,14 @@
-# CLAUDE.md
+# Project guidance
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Mikan is a static blog starter built with Astro 7, Tailwind CSS 4, and MDX.
 
-## Project Overview
-
-Personal portfolio and blog at **xat.sh**, built with Astro 6, Tailwind CSS 4, and MDX. Deployed on Netlify.
-
-## Commands
-
-- `pnpm dev` — start dev server
-- `pnpm build` — production build
-- `pnpm lint` — run ESLint (uses `@withxat/eslint-config`)
-- `pnpm prepare` — run `astro sync` (generates types)
-
-Pre-commit hooks (via lefthook): ESLint with `--fix` on staged `*.{js,ts,json,yml}` files, and `tsc --noEmit` typecheck on `*.ts` files.
-
-## Architecture
-
-- **Content**: Blog posts live in `contents/posts/` as `.mdx` files. Categories and projects are JSON files in `contents/`. Content collections are defined in `src/content.config.ts` using Astro's `glob`/`file` loaders with Zod schemas.
-- **Pages**: `src/pages/index.astro` (home), `src/pages/post/[slug].astro` (blog post), `src/pages/feed.xml.ts` (RSS).
-- **Layouts**: Three layers — `root-layout.astro` (base HTML), `home-layout.astro`, `post-layout.astro`.
-- **Styling**: Tailwind CSS 4 configured via `@tailwindcss/vite` plugin (not PostCSS). Global styles and custom theme in `src/styles/globals.css`. Uses `@theme inline` for design tokens (brand colors, radii, fonts). Custom variants: `has-hover`, `no-hover`, `hover-always`, `mobile-hover`.
-- **Fonts**: Local fonts (Fugaz One, Calling Code) configured in `astro.config.ts` via `fontProviders.local()`.
-- **Icons**: Tailwind icons plugin (`@egoist/tailwindcss-icons`) with `@iconify-json/mingcute` icon set.
-- **Path alias**: `@/` maps to `./src/`.
-- **TypeScript**: Extends `@withxat/tsconfig`. Shared ESLint config from `@withxat/eslint-config`.
+- Read `README.md` for setup, writing, configuration, and deployment.
+- Keep site identity in `src/site.config.ts`; avoid hardcoded author or domain details in components.
+- Use `publishedPosts()` from `src/lib/posts.ts` for every public post listing, feed, and generated route.
+- Posts live directly in `contents/posts/`; category references must match `contents/categories.json` IDs.
+- The Markdown pipeline is explicitly `unified()` to support CJK remark plugins.
+- Fonts are self-hosted through Fontsource, with a system monospace body stack.
+- TypeScript extends Astro's strict preset; `pnpm typecheck` also checks `.astro` components.
+- Preserve readable content with JavaScript disabled and respect reduced-motion preferences.
+- Before committing, run `pnpm lint:fix`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`, and `pnpm test:build`.
+- Use conventional commit messages. Keep unrelated user changes untouched.
