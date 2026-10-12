@@ -154,6 +154,8 @@ GitHub Actions runs lint, type checks, tests, and a production build on pushes a
 
 No server adapter is needed. Set your production URL in `src/site.config.ts` before building.
 
+For a hosted demo, you can set the `SITE_URL` build environment variable instead. It overrides the URL in `src/site.config.ts` so canonical URLs, RSS, and the sitemap point to the deployed site.
+
 ## Project structure
 
 ```text

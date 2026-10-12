@@ -154,6 +154,8 @@ GitHub Actions 会在推送和拉取请求时执行 lint、类型检查、测试
 
 无需服务端适配器。构建前，请先在 `src/site.config.ts` 中设置正式站点地址。
 
+部署在线演示时，也可以设置构建环境变量 `SITE_URL`。它会覆盖 `src/site.config.ts` 中的地址，让规范链接、RSS 和站点地图指向实际部署的站点。
+
 ## 项目结构
 
 ```text

@@ -1,3 +1,5 @@
+import process from 'node:process'
+
 interface SiteConfig {
 	author: string
 	description: string
@@ -34,5 +36,5 @@ export const siteConfig: SiteConfig = {
 	socials: [{ href: '/feed.xml', label: 'RSS' }],
 	tagline: 'A personal notebook',
 	title: 'mikan — A little space on the web',
-	url: 'https://example.com',
+	url: process.env.SITE_URL || 'https://example.com',
 }
