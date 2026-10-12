@@ -1,5 +1,6 @@
 ---
 import Tag from '@/components/tag.astro'
+import { withBase } from '@/lib/urls'
 import { siteConfig } from '@/site.config'
 
 interface Props {
@@ -17,7 +18,7 @@ const { tag } = Astro.props
 	id="header"
 >
 	<div class="flex items-center justify-between">
-		<a aria-label={`${siteConfig.name} home`} class="inline-flex items-center gap-1 font-fugaz-one leading-none" href="/" transition:persist><span class="i-mingcute-sparkles-2-fill translate-y-[-2px] text-brand-foreground" />{siteConfig.name}</a>
+		<a aria-label={`${siteConfig.name} home`} class="inline-flex items-center gap-1 font-fugaz-one leading-none" href={withBase('/')} transition:persist><span class="i-mingcute-sparkles-2-fill translate-y-[-2px] text-brand-foreground" />{siteConfig.name}</a>
 	</div>
 	<Tag tag={tag} />
 </header>

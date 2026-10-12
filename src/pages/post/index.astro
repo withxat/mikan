@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content'
 
 import PostLayout from '@/layouts/post-layout.astro'
 import { postUrl, publishedPosts } from '@/lib/posts'
+import { withBase } from '@/lib/urls'
 import { siteConfig } from '@/site.config'
 
 const posts = publishedPosts(await getCollection('blog'))
@@ -24,7 +25,7 @@ const groups = categories.map(category => ({
 						hover:bg-decoration
 					"
 					>
-						<a class="block p-2" href={postUrl(post.id)}>
+						<a class="block p-2" href={withBase(postUrl(post.id))}>
 							<time class="text-xs text-secondary" datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10)}</time>
 							<h3>{post.data.title}</h3>
 							<p class="text-sm text-inactive">{post.data.summary}</p>

@@ -1,10 +1,11 @@
 ---
 import PostLayout from '@/layouts/post-layout.astro'
+import { withBase } from '@/lib/urls'
 ---
 
 <PostLayout description="This page could not be found." tag="404 — Page not found" title="A little off the path">
 	<div class="flex flex-col gap-4 px-4 py-6">
 		<p>This page may have moved, or the story has not been written yet.</p>
-		<a class="text-link underline underline-offset-4" href="/">Back to home →</a>
+		<a class="text-link underline underline-offset-4" href={withBase('/')}>Back to home →</a>
 	</div>
 </PostLayout>

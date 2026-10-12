@@ -13,3 +13,5 @@ A notebook is a place to notice things. A line from a book, an afternoon experim
 Leave a little room for the unfinished.
 
 This is a plain **Markdown** post. You can write here without importing components or learning a new syntax.
+
+Read the [welcome note](/post/welcome) when you are ready to make this space your own.

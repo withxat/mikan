@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 
 import { postUrl, publishedPosts } from '@/lib/posts'
+import { withBase } from '@/lib/urls'
 import { siteConfig } from '@/site.config'
 
 const latestPosts = publishedPosts(await getCollection('blog')).slice(0, siteConfig.postsPerPage)
@@ -11,11 +12,11 @@ const latestPosts = publishedPosts(await getCollection('blog')).slice(0, siteCon
 	<div class="my-3 flex items-center justify-between">
 		<div class="inline-flex items-center gap-2">
 			<h2 class="ml-4 leading-none font-bold tracking-wide text-heading text-shadow-2xs" id="writing-heading">Writing</h2>
-			<a aria-label="RSS feed" class="inline-flex rounded-sm bg-brand p-1 text-brand-foreground btn-inner-shadow" href="/feed.xml">
+			<a aria-label="RSS feed" class="inline-flex rounded-sm bg-brand p-1 text-brand-foreground btn-inner-shadow" href={withBase('/feed.xml')}>
 				<span class="i-mingcute-rss-2-line text-sm leading-none" />
 			</a>
 		</div>
-		<a class="pressable mr-2 rounded-sm bg-brand px-2 py-1 text-xs text-brand-foreground btn-inner-shadow" href="/post">View all <span aria-hidden="true">→</span></a>
+		<a class="pressable mr-2 rounded-sm bg-brand px-2 py-1 text-xs text-brand-foreground btn-inner-shadow" href={withBase('/post')}>View all <span aria-hidden="true">→</span></a>
 	</div>
 	<ul class="flex flex-col gap-1">
 		{latestPosts.map(post => (
@@ -24,7 +25,7 @@ const latestPosts = publishedPosts(await getCollection('blog')).slice(0, siteCon
 				hover:bg-decoration
 			"
 			>
-				<a class="block p-2" href={postUrl(post.id)}>
+				<a class="block p-2" href={withBase(postUrl(post.id))}>
 					<h3>{post.data.title}</h3>
 					<p class="text-sm text-inactive">{post.data.summary}</p>
 				</a>

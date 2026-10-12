@@ -2,6 +2,7 @@ import process from 'node:process'
 
 interface SiteConfig {
 	author: string
+	base: string
 	description: string
 	footer: string
 	hero: string
@@ -20,6 +21,7 @@ interface SiteConfig {
 // Start here: this configuration drives the pages, metadata, RSS, and sitemap.
 export const siteConfig: SiteConfig = {
 	author: 'Your Name',
+	base: process.env.BASE_PATH || '/',
 	description: 'Notes on making things, learning slowly, and noticing the everyday.',
 	footer: 'Made with care. Powered by Astro.',
 	hero: 'Small thoughts, bright ideas.',

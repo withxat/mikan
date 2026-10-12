@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/urls'
 import { cn } from '@/lib/utils'
 ---
 
@@ -15,9 +16,10 @@ import { cn } from '@/lib/utils'
 	<div
 		class="
 			absolute top-[-9px] z-10 h-2.5 w-full overflow-hidden
-			after:absolute after:top-0 after:left-0 after:h-10 after:w-full after:bg-background after:mask-[url('/image/decoration.svg')] after:mask-contain after:mask-repeat-x after:content-['']
-			after:[-webkit-mask-image:url('/image/decoration.svg')] after:[-webkit-mask-repeat:repeat-x] after:[-webkit-mask-size:contain]
+			after:absolute after:top-0 after:left-0 after:h-10 after:w-full after:bg-background after:mask-(--paper-edge) after:mask-contain after:mask-repeat-x after:content-['']
+			after:[-webkit-mask-image:var(--paper-edge)] after:[-webkit-mask-repeat:repeat-x] after:[-webkit-mask-size:contain]
 		"
+		style={{ '--paper-edge': `url(${withBase('/image/decoration.svg')})` }}
 	>
 	</div>
 	<main

@@ -7,14 +7,16 @@ import { defineConfig } from 'astro/config'
 import remarkCjkFriendly from 'remark-cjk-friendly'
 import remarkCjkFriendlyGfmStrikethrough from 'remark-cjk-friendly-gfm-strikethrough'
 
+import { remarkBasePath } from './src/lib/remark-base-path'
 import { siteConfig } from './src/site.config'
 
 export default defineConfig({
+	base: siteConfig.base,
 	compressHTML: true,
 	integrations: [sitemap(), mdx(), compressor()],
 	markdown: {
 		processor: unified({
-			remarkPlugins: [remarkCjkFriendly, remarkCjkFriendlyGfmStrikethrough],
+			remarkPlugins: [remarkCjkFriendly, remarkCjkFriendlyGfmStrikethrough, remarkBasePath],
 		}),
 		shikiConfig: { theme: 'vesper' },
 	},

@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+[在线演示](https://withxat.github.io/mikan/)
+
 一个温暖、简洁的博客模板，基于 Astro、Tailwind CSS 和 MDX。留一小块地方，放下你的文字、作品和日常发现。
 
 从 [Xat](https://github.com/withxat) 的个人网站整理而来，保留了橙色主题、纸张边缘和轻巧的交互。
@@ -51,6 +53,7 @@ pnpm dev
 | 配置项 | 用途 |
 | --- | --- |
 | `url` | 正式站点地址，例如 `https://your-domain.com` |
+| `base` | 部署路径，默认为 `/`；GitHub Pages 工作流会自动设置 |
 | `name`、`title`、`description` | 站点名称、浏览器标题和描述 |
 | `author`、`lang` | 作者署名和 HTML 语言，例如 `zh-CN` |
 | `tagline`、`hero`、`intro` | 首页文案 |
@@ -59,7 +62,7 @@ pnpm dev
 | `postsPerPage` | 首页展示的最新文章数量 |
 | `footer`、`ogImage` | 页脚文案和分享图路径 |
 
-部署前，将 `https://example.com` 替换为正式站点地址。规范链接、RSS、站点地图和自动生成的分享图都会使用它。模板按域名根路径部署设计，不支持直接部署到子目录。
+部署前，将 `https://example.com` 替换为正式站点地址。规范链接、RSS、站点地图和自动生成的分享图都会使用它。部署到子目录时，设置 `base`（或构建环境变量 `BASE_PATH`），例如 `/mikan`。
 
 默认分享图会跟随站点名称、标语和域名生成。如果想使用自己的图片，将文件放入 `public/`，再修改 `ogImage`。
 
@@ -148,6 +151,7 @@ GitHub Actions 会在推送和拉取请求时执行 lint、类型检查、测试
 
 | 平台 | 配置 |
 | --- | --- |
+| GitHub Pages | 在 **Settings → Pages** 中将来源设为 **GitHub Actions**，然后推送到 `main`，或手动运行 **Deploy demo**。 |
 | Netlify | 导入仓库即可，`netlify.toml` 已配置 Node 24、`pnpm build` 和发布目录 `dist`。 |
 | Vercel | 按 Astro 项目导入，构建命令为 `pnpm build`，输出目录为 `dist`。`vercel.json` 配置了不带尾部斜杠的 URL。 |
 | 其他静态托管服务 | 运行 `pnpm install --frozen-lockfile && pnpm build`，上传 `dist/`，并将不存在的路径交给 `404.html`。 |
@@ -155,6 +159,10 @@ GitHub Actions 会在推送和拉取请求时执行 lint、类型检查、测试
 无需服务端适配器。构建前，请先在 `src/site.config.ts` 中设置正式站点地址。
 
 部署在线演示时，也可以设置构建环境变量 `SITE_URL`。它会覆盖 `src/site.config.ts` 中的地址，让规范链接、RSS 和站点地图指向实际部署的站点。
+
+[在线演示](https://withxat.github.io/mikan/) 使用 GitHub Pages。源码保留在 `main`；**Deploy demo** 工作流完成构建和检查后，将生成的静态文件提交到 `mikan` 分支，并将同一份文件发布到 Pages。域名和部署路径直接从 GitHub 读取，修改仓库名或绑定自定义域名后无需改动工作流。
+
+Markdown 和 MDX 中以 `/` 开头的站内链接，例如 `[欢迎](/post/welcome)`，会自动适配部署路径。在自定义 Astro 组件中添加站内链接时，请使用 `src/lib/urls.ts` 中的 `withBase()`。
 
 ## 项目结构
 

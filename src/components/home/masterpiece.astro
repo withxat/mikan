@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 
+import { withBase } from '@/lib/urls'
 import { siteConfig } from '@/site.config'
 
 const projects = await getCollection('projects')
@@ -10,7 +11,7 @@ const projects = await getCollection('projects')
 	<section aria-labelledby="projects-heading" class="py-2">
 		<div class="my-3 flex items-center justify-between">
 			<h2 class="ml-4 leading-none font-bold tracking-wide text-heading text-shadow-2xs" id="projects-heading">Projects</h2>
-			{siteConfig.projects.moreUrl && <a class="pressable mr-2 rounded-sm bg-brand px-2 py-1 text-xs text-brand-foreground btn-inner-shadow" href={siteConfig.projects.moreUrl} rel="noopener noreferrer" target="_blank">View all <span aria-hidden="true">↗</span></a>}
+			{siteConfig.projects.moreUrl && <a class="pressable mr-2 rounded-sm bg-brand px-2 py-1 text-xs text-brand-foreground btn-inner-shadow" href={withBase(siteConfig.projects.moreUrl)} rel="noopener noreferrer" target="_blank">View all <span aria-hidden="true">↗</span></a>}
 		</div>
 		<ul class="flex flex-col gap-1">
 			{projects.map(project => (
@@ -19,7 +20,7 @@ const projects = await getCollection('projects')
 					hover:bg-decoration
 				"
 				>
-					<a class="block p-2" href={project.data.link} rel="noopener noreferrer" target="_blank">
+					<a class="block p-2" href={withBase(project.data.link)} rel="noopener noreferrer" target="_blank">
 						<h3>{project.data.title} <span aria-hidden="true">↗</span></h3>
 						<p class="text-sm text-inactive">{project.data.description}</p>
 					</a>

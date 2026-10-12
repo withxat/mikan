@@ -2,6 +2,7 @@ import rss from '@astrojs/rss'
 import { getCollection } from 'astro:content'
 
 import { postUrl, publishedPosts } from '@/lib/posts'
+import { absoluteUrl, withBase } from '@/lib/urls'
 import { siteConfig } from '@/site.config'
 
 export async function GET() {
@@ -11,12 +12,12 @@ export async function GET() {
 		items: posts.map(post => ({
 			categories: post.data.tags,
 			description: post.data.summary,
-			link: postUrl(post.id),
+			link: absoluteUrl(postUrl(post.id)).href,
 			pubDate: post.data.date,
 			title: post.data.title,
 		})),
-		site: siteConfig.url,
-		stylesheet: '/rss.xsl',
+		site: absoluteUrl('/'),
+		stylesheet: withBase('/rss.xsl'),
 		title: siteConfig.title,
 		trailingSlash: false,
 	})

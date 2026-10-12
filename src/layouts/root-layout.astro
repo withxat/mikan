@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets'
 import { ClientRouter } from 'astro:transitions'
 
 import Noise from '@/assets/noise.png'
+import { absoluteUrl, withBase } from '@/lib/urls'
 import { siteConfig } from '@/site.config'
 
 import '@fontsource/fugaz-one/latin-400.css'
@@ -18,7 +19,7 @@ const noise = await getImage({ format: 'webp', src: Noise })
 const { description = siteConfig.description, publishedAt, title } = Astro.props
 const pageTitle = title ? `${title} — ${siteConfig.name}` : siteConfig.title
 const canonical = new URL(Astro.url.pathname, siteConfig.url)
-const ogImage = new URL(siteConfig.ogImage, siteConfig.url)
+const ogImage = absoluteUrl(siteConfig.ogImage)
 ---
 
 <html lang={siteConfig.lang}>
@@ -26,10 +27,10 @@ const ogImage = new URL(siteConfig.ogImage, siteConfig.url)
 		<meta charset="UTF-8" />
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 		<ClientRouter />
-		<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-		<link href="/sitemap-index.xml" rel="sitemap" />
+		<link href={withBase('/favicon.svg')} rel="icon" type="image/svg+xml" />
+		<link href={withBase('/sitemap-index.xml')} rel="sitemap" />
 		<link href={canonical} rel="canonical" />
-		<link href={new URL('/feed.xml', siteConfig.url)} rel="alternate" title={siteConfig.title} type="application/rss+xml" />
+		<link href={absoluteUrl('/feed.xml')} rel="alternate" title={siteConfig.title} type="application/rss+xml" />
 		<title>{pageTitle}</title>
 		<meta content={description} name="description" />
 		<meta content={siteConfig.author} name="author" />

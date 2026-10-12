@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+[Live demo](https://withxat.github.io/mikan/)
+
 A warm, minimal blog template built with Astro, Tailwind CSS, and MDX. A little space for your writing, projects, and everyday discoveries.
 
 Adapted from [Xat](https://github.com/withxat)'s personal website, with an orange palette, a paper edge, and gentle interactions.
@@ -51,6 +53,7 @@ All site identity settings live in [`src/site.config.ts`](./src/site.config.ts).
 | Setting | Purpose |
 | --- | --- |
 | `url` | Production origin, such as `https://your-domain.com` |
+| `base` | Deployment path, `/` by default; set automatically by the GitHub Pages workflow |
 | `name`, `title`, `description` | Site name, browser title, and description |
 | `author`, `lang` | Author credit and HTML language, such as `zh-CN` |
 | `tagline`, `hero`, `intro` | Home page text |
@@ -59,7 +62,7 @@ All site identity settings live in [`src/site.config.ts`](./src/site.config.ts).
 | `postsPerPage` | Number of recent posts on the home page |
 | `footer`, `ogImage` | Footer text and sharing image path |
 
-Replace `https://example.com` with your production origin before deployment. It controls canonical URLs, RSS, the sitemap, and the generated sharing image. This template is designed for the root of a domain, not a subdirectory.
+Replace `https://example.com` with your production origin before deployment. It controls canonical URLs, RSS, the sitemap, and the generated sharing image. For a subdirectory deployment, set `base` (or the `BASE_PATH` build environment variable), for example `/mikan`.
 
 The default sharing image follows your site name, tagline, and hostname. To use your own image, put it in `public/` and update `ogImage`.
 
@@ -148,6 +151,7 @@ GitHub Actions runs lint, type checks, tests, and a production build on pushes a
 
 | Host | Setup |
 | --- | --- |
+| GitHub Pages | In **Settings → Pages**, select **GitHub Actions** as the source, then push to `main` or run **Deploy demo** manually. |
 | Netlify | Import the repository. `netlify.toml` sets Node 24, `pnpm build`, and the `dist` publish directory. |
 | Vercel | Import as an Astro project with `pnpm build` and `dist`. `vercel.json` configures URLs without trailing slashes. |
 | Other static hosts | Run `pnpm install --frozen-lockfile && pnpm build`, then upload `dist/`. Serve `404.html` for missing routes. |
@@ -155,6 +159,10 @@ GitHub Actions runs lint, type checks, tests, and a production build on pushes a
 No server adapter is needed. Set your production URL in `src/site.config.ts` before building.
 
 For a hosted demo, you can set the `SITE_URL` build environment variable instead. It overrides the URL in `src/site.config.ts` so canonical URLs, RSS, and the sitemap point to the deployed site.
+
+The [live demo](https://withxat.github.io/mikan/) uses GitHub Pages. Source code stays on `main`; the **Deploy demo** workflow builds and checks the site, commits only the generated static files to the `mikan` branch, and publishes the same files to Pages. It reads the deployment origin and base path from GitHub, so a new repository name or custom domain does not need a workflow edit.
+
+Root-relative links in Markdown and MDX, such as `[Welcome](/post/welcome)`, follow the configured base path. Use `withBase()` from `src/lib/urls.ts` for internal links in custom Astro components.
 
 ## Project structure
 
